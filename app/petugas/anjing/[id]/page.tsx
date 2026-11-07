@@ -1,0 +1,14 @@
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { ListSkeleton } from "@/components/ui";
+import { DogDetail } from "./dog-detail";
+
+export const metadata: Metadata = { title: "Data anjing" };
+
+export default function DogPage() {
+  return (
+    <Suspense fallback={<ListSkeleton rows={4} label="Memuat data anjing" />}>
+      <DogDetail />
+    </Suspense>
+  );
+}

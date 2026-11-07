@@ -1,26 +1,73 @@
-@import "tailwindcss";
+/* Scan only app code for class names; ai-service/ holds gigabytes of Python packages and model files. */
+@import "tailwindcss" source(none);
+@source "../app";
+@source "../components";
+@source "../lib";
+
+/*
+ * Light, warm-neutral UI for outdoor use: near-black text on off-white, one ink-blue accent.
+ * Semantic colours are reserved: green = vaccinated, amber = unsure/pending, red = emergency/error.
+ */
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: #f7f5f0;
+  --color-surface: #ffffff;
+  --color-sunken: #efece5;
+  --color-line: #ddd8cd;
+  --color-line-strong: #b9b2a3;
+  --color-ink: #1b1915;
+  --color-ink-muted: #4f4a41;
+  --color-ink-faint: #6b6559;
+
+  --color-accent: #1f4f7a;
+  --color-accent-hover: #173d5f;
+  --color-accent-soft: #e3ecf4;
+  --color-on-accent: #ffffff;
+
+  --color-ok: #17603a;
+  --color-ok-soft: #e2f1e7;
+  --color-wait: #7a4a00;
+  --color-wait-soft: #fbefd5;
+  --color-wait-line: #e2b45c;
+  --color-danger: #b3261e;
+  --color-danger-hover: #8f1e18;
+  --color-danger-soft: #fbe7e5;
+
+  --radius-card: 0.875rem;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01";
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

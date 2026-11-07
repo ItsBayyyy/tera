@@ -1,0 +1,67 @@
+import { expect, test, type Page } from "@playwright/test";
+import { fixture, login, setAiMode } from "./helpers";
+
+async function fileReport(page: Page) {
+  await page.goto("/darurat");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Digigit anjing");
+  await expect(page.getByRole("link", { name: "Telepon 119" })).toHaveAttribute("href", "tel:119");
+  await expect(page.getByRole("link", { name: "Telepon 112" })).toHaveAttribute("href", "tel:112");
+  await expect(page.getByText("Cuci luka dengan sabun dan air mengalir")).toBeVisible();
+
+  await page.getByRole("button", { name: "Isi laporan singkat" }).click();
+  await page.getByText("Tangan atau jari").click();
+  await page.locator('input[type="file"]').setInputFiles(fixture("photo-c.jpg"));
+  await expect(page.getByAltText("Pratinjau foto anjing")).toBeVisible();
+  await page.getByLabel("Nomor HP").fill("0812 3456 7890");
+  await page.getByRole("button", { name: "Kirim laporan" }).click();
+  await expect(page.getByText("Centang persetujuan")).toBeVisible();
+  await page.getByText("Saya setuju petugas kesehatan").click();
+  await page.getByRole("button", { name: "Kirim laporan" }).click();
+
+  await expect(page.getByRole("heading", { name: "Laporan diterima petugas" })).toBeVisible();
+  const code = await page.getByTestId("case-code").innerText();
+  expect(code).toMatch(/^[A-Z0-9]{3}-[A-Z0-9]{3}$/);
+  await expect(page.getByText("Tetap ke puskesmas atau rumah sakit hari ini.")).toBeVisible();
+  // Citizens never see anything about the dog or its vaccination status.
+  await expect(page.getByText(/Tervaksin|Belum ada catatan vaksin|Kemiripan/)).toHaveCount(0);
+  return code;
+}
+
+test.describe("citizen emergency flow", () => {
+  test.afterAll(async () => {
+    await setAiMode("up");
+  });
+
+  test("works with AI up and the report reaches the officer queue", async ({ page, browser }) => {
+    await setAiMode("up");
+    const code = await fileReport(page);
+
+    const officer = await browser.newPage();
+    await login(officer);
+    await officer.getByRole("link", { name: "Kasus" }).click();
+    await officer.getByRole("link", { name: new RegExp(code) }).click();
+    await expect(officer.getByRole("heading", { name: code })).toBeVisible();
+    await expect(officer.getByText("Saran AI, bukan kepastian.")).toBeVisible();
+    await expect(officer.getByRole("link", { name: /0812/ })).toBeVisible();
+    await officer.getByRole("button", { name: "Ditangani" }).click();
+    await expect(officer.getByText("Status: Ditangani.")).toBeVisible();
+  });
+
+  test("still accepts the report when the AI service is down", async ({ page }) => {
+    await setAiMode("down");
+    await fileReport(page);
+  });
+
+  test("the guide still opens offline after a first visit", async ({ page, context }) => {
+    await page.goto("/darurat");
+    await page.evaluate(async () => {
+      await navigator.serviceWorker.ready;
+    });
+    await page.reload();
+    await context.setOffline(true);
+    await page.reload();
+    await expect(page.getByText("Cuci luka dengan sabun dan air mengalir")).toBeVisible();
+    await expect(page.getByRole("link", { name: "Telepon 119" })).toBeVisible();
+    await context.setOffline(false);
+  });
+});
