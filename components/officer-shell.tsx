@@ -7,9 +7,9 @@ import { ErrorState, ListSkeleton } from "@/components/ui";
 import { OfficerProvider, useOfficer } from "./officer-context";
 
 const NAV = [
-  { href: "/petugas", label: "Scan", exact: true },
-  { href: "/petugas/kasus", label: "Kasus" },
-  { href: "/admin", label: "Admin", adminOnly: true },
+  { href: "/petugas", label: "Scan", isActive: (p: string) => p.startsWith("/petugas") && !p.startsWith("/petugas/kasus") },
+  { href: "/petugas/kasus", label: "Kasus", isActive: (p: string) => p.startsWith("/petugas/kasus") },
+  { href: "/admin", label: "Admin", adminOnly: true, isActive: (p: string) => p.startsWith("/admin") },
 ];
 
 export function OfficerShell({ children }: { children: ReactNode }) {
@@ -57,7 +57,7 @@ function OfficerNav() {
       <nav aria-label="Menu petugas" className="mx-auto max-w-3xl px-2">
         <ul className="flex gap-1">
           {NAV.filter((item) => !item.adminOnly || isAdmin).map((item) => {
-            const active = item.exact ? pathname === item.href : pathname.startsWith(item.href);
+            const active = item.isActive(pathname);
             return (
               <li key={item.href}>
                 <Link

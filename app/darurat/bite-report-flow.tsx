@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Camera, MapPin, TriangleAlert } from "lucide-react";
 import { Button, Card, FieldError, Label, Notice, inputClass } from "@/components/ui";
 import { BODY_PARTS, BODY_PART_LABEL } from "@/lib/validation/report";
@@ -125,7 +125,6 @@ function ReportForm({ status, setStatus }: { status: Status; setStatus: (s: Stat
       const data = (await response.json()) as { caseCode?: string; error?: string; fieldErrors?: Record<string, string> };
       if (response.ok && data.caseCode) {
         setStatus({ kind: "done", caseCode: data.caseCode });
-        window.scrollTo({ top: 0 });
         return;
       }
       setStatus({ kind: "error", message: data.error ?? "Laporan belum terkirim. Coba lagi.", fieldErrors: data.fieldErrors });
@@ -259,10 +258,17 @@ function ReportForm({ status, setStatus }: { status: Status; setStatus: (s: Stat
 }
 
 function ReportReceived({ caseCode }: { caseCode: string }) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  // The confirmation replaces the form further down the page; bring it into view and announce it.
+  useEffect(() => {
+    headingRef.current?.scrollIntoView({ block: "center" });
+    headingRef.current?.focus();
+  }, []);
+
   return (
     <section aria-labelledby="diterima-title" className="mt-10 space-y-4" aria-live="polite">
       <Card className="border-2 border-ok">
-        <h2 id="diterima-title" className="text-xl font-bold text-ok">
+        <h2 id="diterima-title" ref={headingRef} tabIndex={-1} className="text-xl font-bold text-ok outline-none">
           Laporan diterima petugas
         </h2>
         <p className="mt-2 text-ink-muted">Sebutkan kode ini bila petugas menghubungi atau saat berobat:</p>

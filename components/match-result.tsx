@@ -86,7 +86,7 @@ export function MatchResult({ zone, candidates, onChoose, onRegister }: Props) {
       ) : null}
 
       <Button variant={effectiveZone === "none" ? "primary" : "secondary"} className="w-full" onClick={onRegister}>
-        {effectiveZone === "none" ? "Daftarkan anjing baru" : "Tidak ada yang cocok, daftarkan baru"}
+        Daftarkan anjing baru
       </Button>
 
       {effectiveZone === "none" && visible.length > 0 ? (

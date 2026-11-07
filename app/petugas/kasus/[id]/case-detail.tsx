@@ -235,9 +235,9 @@ export function CaseDetail() {
               key={status}
               variant={report.status === status ? "primary" : "secondary"}
               aria-pressed={report.status === status}
-              disabled={saving || report.status === status}
+              disabled={saving}
               className="px-2"
-              onClick={() => patch({ status }, `Status: ${STATUS_LABEL[status]}.`)}
+              onClick={() => report.status !== status && patch({ status }, `Status: ${STATUS_LABEL[status]}.`)}
             >
               {STATUS_LABEL[status]}
             </Button>

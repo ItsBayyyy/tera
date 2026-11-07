@@ -30,6 +30,7 @@ test.describe("officer flow with AI (mocked)", () => {
     await expect(page.getByText("Vaksin tercatat")).toBeVisible();
 
     await page.getByRole("button", { name: "Scan anjing berikutnya" }).click();
+    await expect(page.getByRole("heading", { name: "Foto wajah anjing" })).toBeVisible();
     await page.getByTestId("photo-input").setInputFiles(fixture("photo-a.jpg"));
     await expect(page.getByText("Foto bisa dipakai")).toBeVisible();
     await page.getByRole("button", { name: /Cari kecocokan/ }).click();
