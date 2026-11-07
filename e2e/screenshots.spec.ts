@@ -35,6 +35,14 @@ async function shot(page: Page, name: string) {
   await page.setViewportSize({ width: 360, height: 780 });
 }
 
+let original = { strong: 0.667, unsure: 0.39 };
+
+async function readThresholds() {
+  const { data } = await serviceClient().from("app_config").select("key, value");
+  const map = new Map((data ?? []).map((row: { key: string; value: unknown }) => [row.key, Number(row.value)]));
+  return { strong: map.get("match_strong") ?? original.strong, unsure: map.get("match_unsure") ?? original.unsure };
+}
+
 async function setThresholds(strong: number, unsure: number) {
   const db = serviceClient();
   await db.from("app_config").update({ value: strong }).eq("key", "match_strong");
@@ -42,12 +50,13 @@ async function setThresholds(strong: number, unsure: number) {
 }
 
 test.beforeAll(async () => {
+  original = await readThresholds();
   await setAiMode("up");
   await resetE2eBanjar();
 });
 
 test.afterAll(async () => {
-  await setThresholds(0.7, 0.5);
+  await setThresholds(original.strong, original.unsure);
   await setAiMode("up");
 });
 
@@ -118,7 +127,7 @@ test("officer scan states", async ({ page }) => {
   await page.getByRole("button", { name: /Cari kecocokan/ }).click();
   await expect(page.getByRole("heading", { name: "Ragu: periksa manual" })).toBeVisible();
   await shot(page, "15-hasil-ragu");
-  await setThresholds(0.7, 0.5);
+  await setThresholds(original.strong, original.unsure);
 
   await setAiMode("down");
   await page.goto("/petugas/scan");

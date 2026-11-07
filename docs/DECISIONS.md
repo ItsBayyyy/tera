@@ -27,3 +27,12 @@ Setiap keputusan yang tidak ditetapkan eksplisit oleh `KENALASU_BUILD_PROMPT.md`
 - **D15 — Pencocokan laporan warga berjalan setelah respons (`after()`).** Warga langsung mendapat kode kasus; kegagalan AI tidak pernah menunda atau menggagalkan laporan.
 - **D16 — Rate limit in-memory per instance** (5 laporan / 10 menit / IP). Cukup untuk meredam banjir tak sengaja; bukan batas keamanan. Dicatat sebagai keterbatasan.
 - **D17 — Job rematch:** foto tanpa embedding diproses ulang; kandidat anjing lain dengan skor ≥ `match_unsure` di banjar yang sama ditandai `duplicate_flags`. Vaksinasi `pending` naik ke `verified` hanya bila tidak ada tanda duplikat terbuka. Foto yang ditolak kualitas diberi `model_version = 'rejected:<alasan>'` agar tidak diproses berulang.
+
+## AI service
+
+- **D18 — Detektor OWL-ViT base-patch32, bukan OWLv2.** OWLv2 @960 butuh ~5,2 s untuk deteksi saja di CPU (target total p50 ≤ 3 s) dan @480 tidak punya ambang bersih anjing vs bukan-anjing. B/32: deteksi p50 571 ms dan rank-1 lebih tinggi pada 60 anjing yang sama (82,2% vs 73,8%). Angka di `docs/AI.md`.
+- **D19 — MiewID dimuat tanpa `trust_remote_code`.** Kode checkpoint tidak kompatibel dengan transformers 5.x; arsitektur dibangun ulang dengan timm dan bobot dimuat `strict=True`. Kesetaraan dicek (cosine ≥ 0,999999 pada 14 foto). Revisi model dan detektor dipatok agar ambang tetap berlaku.
+- **D20 — Tanpa ONNX.** Target latensi sudah terpenuhi (p50 ≈ 0,9 s); ekspor menambah dependensi dan kode tanpa kebutuhan.
+- **D21 — Ambang default diganti ke 0,667 / 0,39** (migrasi `20261108000400`) mengikuti rekomendasi `scripts/eval.py` pada foto mentah DogFaceNet — set yang paling mirip foto lapangan. Hanya baris yang belum diubah admin yang diganti; tetap ditandai "sementara".
+- **D22 — Bobot model dimasukkan ke image Docker saat build** dan container berjalan dengan `HF_HUB_OFFLINE=1`, agar Space yang bangun dari tidur tidak bergantung pada unduhan ulang.
+- **D23 — Screenshot dikompres ke PNG 256 warna** (26 MB → 10 MB) agar repo tetap ringan; cukup untuk tinjauan visual.
