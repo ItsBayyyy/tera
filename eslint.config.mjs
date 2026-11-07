@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Python service, local data and generated output are not part of the Next.js app.
+    "ai-service/**",
+    "data/**",
+    "playwright-report/**",
+    "test-results/**",
+    "lib/supabase/database.types.ts",
   ]),
 ]);
 
