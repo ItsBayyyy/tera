@@ -26,6 +26,13 @@ export function formatPercent(part: number, whole: number): string {
   return `${percentFormat.format((part / whole) * 100)}%`;
 }
 
+/** "mm:ss" for a countdown; partial seconds round up so "00:00" only shows once time is up. */
+export function formatCountdown(remainingMs: number): string {
+  const seconds = Math.max(0, Math.ceil(remainingMs / 1000));
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${pad(Math.floor(seconds / 60))}:${pad(seconds % 60)}`;
+}
+
 /** Width for a similarity bar; scores below zero render as an empty bar. */
 export function scoreBarWidth(score: number): number {
   return Math.round(Math.min(Math.max(score, 0), 1) * 100);

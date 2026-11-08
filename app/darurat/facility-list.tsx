@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Phone } from "lucide-react";
 import { ListSkeleton } from "@/components/ui";
+import { NearbyCareLink } from "./nearby-care-link";
 
 type Facility = {
   id: string;
@@ -36,10 +37,13 @@ export function FacilityList() {
       </h3>
       {state.kind === "loading" ? <ListSkeleton rows={2} label="Memuat daftar faskes" /> : null}
       {state.kind === "offline" || (state.kind === "ready" && state.facilities.length === 0) ? (
-        <p className="mt-2 rounded-xl bg-surface p-4 leading-relaxed text-ink-muted ring-1 ring-line">
-          {state.kind === "offline" ? "Daftar faskes tidak bisa dimuat tanpa sinyal. " : "Daftar faskes belum diisi petugas. "}
-          Datangi puskesmas atau rumah sakit terdekat hari ini. Bila darurat, telepon 119.
-        </p>
+        <div className="mt-2 rounded-xl bg-surface p-4 ring-1 ring-line">
+          <p className="leading-relaxed text-ink-muted">
+            {state.kind === "offline" ? "Daftar faskes tidak bisa dimuat tanpa sinyal. " : "Daftar faskes belum diisi petugas. "}
+            Datangi puskesmas atau rumah sakit terdekat hari ini. Bila darurat, telepon 119.
+          </p>
+          <NearbyCareLink />
+        </div>
       ) : null}
       {state.kind === "ready" && state.facilities.length > 0 ? (
         <ul className="mt-3 space-y-3">

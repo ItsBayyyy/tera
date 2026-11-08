@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { vaccineState, vaccineExpiry } from "@/lib/vaccine";
-import { formatPercent, formatScore, scoreBarWidth } from "@/lib/format";
+import { formatCountdown, formatPercent, formatScore, scoreBarWidth } from "@/lib/format";
 import { CASE_CODE_ALPHABET, generateCaseCode } from "@/lib/case-code";
 import { roundCoordinate } from "@/lib/geo";
 import { createRateLimiter } from "@/lib/rate-limit";
@@ -108,5 +108,18 @@ describe("hasAuthCookie", () => {
   it("is false when the browser did not store it", () => {
     expect(hasAuthCookie("")).toBe(false);
     expect(hasAuthCookie("theme=light; sb-127-auth-token-code-verifier=x")).toBe(false);
+  });
+});
+
+describe("formatCountdown", () => {
+  it("shows minutes and seconds with leading zeros", () => {
+    expect(formatCountdown(15 * 60_000)).toBe("15:00");
+    expect(formatCountdown(61_000)).toBe("01:01");
+  });
+
+  it("rounds partial seconds up and never goes negative", () => {
+    expect(formatCountdown(999)).toBe("00:01");
+    expect(formatCountdown(0)).toBe("00:00");
+    expect(formatCountdown(-5_000)).toBe("00:00");
   });
 });

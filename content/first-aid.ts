@@ -5,10 +5,16 @@
  */
 export const FIRST_AID_REVIEWED = false;
 
+/** Shown under the page title to steady a panicking reader before the steps. */
+export const FIRST_AID_INTRO = "Rabies bisa dicegah bila ditangani cepat. Ikuti langkah di bawah, satu per satu.";
+
+export const WASH_MINUTES = 15;
+
 export const FIRST_AID_STEPS = [
   {
     title: "Cuci luka dengan sabun dan air mengalir",
-    detail: "Lakukan sekitar 15 menit. Ini langkah paling penting.",
+    detail: `Lakukan sekitar ${WASH_MINUTES} menit. Ini langkah paling penting.`,
+    action: "wash-timer",
   },
   {
     title: "Beri antiseptik setelah dicuci",
@@ -21,6 +27,7 @@ export const FIRST_AID_STEPS = [
   {
     title: "Segera ke puskesmas atau rumah sakit hari ini",
     detail: "Petugas akan memeriksa luka dan kebutuhan vaksin anti-rabies (VAR).",
+    action: "nearby-care",
   },
   {
     title: "Jangan mengejar atau menangkap anjingnya",

@@ -93,7 +93,7 @@
         <p class="box-title">Alur warga (tanpa login, bisa offline)</p>
         <ol class="steps">
           <li>Buka "Saya digigit anjing". Setelah situs pernah dibuka, halaman ini tersimpan di perangkat dan tetap terbuka tanpa sinyal.</li>
-          <li>Ikuti panduan bernomor; tombol Telepon 119 dan 112 selalu terlihat.</li>
+          <li>Ikuti panduan bernomor: timer cuci luka 15 menit dan tombol peta puskesmas terdekat; tombol Telepon 119 dan 112 selalu terlihat.</li>
           <li>Opsional: kirim laporan (waktu, bagian tubuh, lokasi dibulatkan, foto anjing dari jarak aman). Warga langsung mendapat kode kasus.</li>
           <li>Laporan masuk antrean petugas secara real-time. AI menyarankan kandidat anjing penggigit; petugas yang memastikan.</li>
         </ol>
@@ -187,7 +187,7 @@
       <tbody>
         <tr><td><span class="tag core">Inti</span></td><td>Scan 1–3 foto, pesan kualitas per foto, hasil tiga zona</td><td><code>/petugas/scan</code>; e2e officer</td></tr>
         <tr><td><span class="tag core">Inti</span></td><td>Daftar anjing baru, catat vaksin, riwayat vaksin, tambah foto</td><td><code>/petugas/anjing/[id]</code></td></tr>
-        <tr><td><span class="tag core">Inti</span></td><td>Mode Warga: panduan, tombol 119/112, offline, laporan + kode kasus</td><td><code>/darurat</code>; e2e citizen</td></tr>
+        <tr><td><span class="tag core">Inti</span></td><td>Mode Warga: panduan, timer cuci luka, peta faskes, 119/112, laporan</td><td><code>/darurat</code>; e2e citizen</td></tr>
         <tr><td><span class="tag core">Inti</span></td><td>AI gagal: "Catat tanpa verifikasi AI", lalu rematch dan tanda calon duplikat</td><td>e2e fallback</td></tr>
         <tr><td><span class="tag">Tambahan</span></td><td>Antrean laporan real-time; kandidat AI wajib dikonfirmasi petugas</td><td><code>/petugas/kasus</code></td></tr>
         <tr><td><span class="tag">Tambahan</span></td><td>Dasbor admin: cakupan per banjar, faskes, ambang, calon duplikat</td><td><code>/admin</code></td></tr>
@@ -196,13 +196,13 @@
     </table>
 
     <div class="shots">
-      <figure><img src="../screenshots/02-darurat-360.png" alt="Mode Warga" class="crop"><figcaption><span class="fn">Gambar 2.</span> Mode Warga: panduan dan tombol 119/112.</figcaption></figure>
+      <figure><img src="../screenshots/02-darurat-360.png" alt="Mode Warga" class="crop"><figcaption><span class="fn">Gambar 2.</span> Mode Warga: panduan dan timer cuci luka.</figcaption></figure>
       <figure><img src="img/demo-dikenali.png" alt="Hasil zona kuat" class="crop"><figcaption><span class="fn">Gambar 3.</span> Model asli: dikenali benar, zona kuat, skor 0,73.</figcaption></figure>
       <figure><img src="img/demo-tidak-cocok.png" alt="Hasil zona tidak cocok" class="fit"><figcaption><span class="fn">Gambar 4.</span> Model asli: anjing tak terdaftar, zona tidak cocok.</figcaption></figure>
       <figure><img src="../screenshots/16-scan-ai-mati-360.png" alt="AI tidak tersedia" class="crop" style="object-position: 50% 45%"><figcaption><span class="fn">Gambar 5.</span> AI tidak tersedia: tetap bisa mencatat.</figcaption></figure>
     </div>
     <p class="note">Gambar 3–4: <code>/demo</code> dengan AI service asli (<code>scripts/capture-proposal-screens.mjs</code>); foto DogFaceNet (CC BY 4.0) dan Wikimedia Commons (domain publik). Gambar 2 dan 5: screenshot e2e.</p>
-    <p><strong>Pengujian</strong> (dijalankan di repo): Vitest 44, test database 11, Playwright end-to-end 8 alur, pytest 38 + 21. <strong>Cara juri menguji:</strong> di <code>/demo</code>, unggah dua foto berbeda dari anjing yang sama (A didaftarkan, B dicocokkan).</p>
+    <p><strong>Pengujian</strong> (dijalankan di repo): Vitest 46, test database 11, Playwright end-to-end 9 alur, pytest 38 + 21. <strong>Cara juri menguji:</strong> di <code>/demo</code>, unggah dua foto berbeda dari anjing yang sama (A didaftarkan, B dicocokkan).</p>
 
     <h2><span class="num">6</span>Technical Architecture</h2>
     <figure>
