@@ -2,9 +2,8 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    agentFeedback: true,
-  },
+  // No AGENTS.md or agent feedback blocks written by `next dev`.
+  agentRules: false,
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

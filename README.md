@@ -11,7 +11,7 @@ Aplikasi web (PWA, mobile-first) untuk pengendalian rabies di Bali. **Petugas va
 | Lomba | Bali DigiFest 2026 — AI Web Innovation Challenge |
 | Kategori | Mahasiswa/Umum |
 | Subtema | Bali Smart Society |
-| URL live | *(isi setelah deploy — lihat `MORNING_TODO.md`)* |
+| URL live | *(isi setelah deploy — lihat [`docs/DEPLOY.md`](docs/DEPLOY.md))* |
 | Versi yang dinilai | tag `v1.0-submission` |
 | Peserta | Made Bayu Ardana Putra (individu), Universitas Primakara |
 
@@ -160,13 +160,13 @@ PLAYWRIGHT_BROWSERS_PATH=0 npx playwright test   # e2e dengan AI mock (hidup & m
 
 ## Deploy
 
-Langkah untuk pemilik repo (Supabase cloud, Vercel, Hugging Face Spaces): [`MORNING_TODO.md`](MORNING_TODO.md). Semua di tier gratis, tanpa kartu kredit.
+Langkah deploy (Supabase cloud, Vercel, Hugging Face Spaces): [`docs/DEPLOY.md`](docs/DEPLOY.md). Semua di tier gratis, tanpa kartu kredit.
 
 ## Model, dataset, dan lisensi
 
 | Komponen | Lisensi |
 |---|---|
-| MiewID msv3 (`conservationxlabs/miewid-msv3`) | **Tidak dinyatakan** oleh pembuatnya; izin tertulis belum diperoleh (lihat `MORNING_TODO.md`) |
+| MiewID msv3 (`conservationxlabs/miewid-msv3`) | **Tidak dinyatakan** oleh pembuatnya; izin tertulis belum diperoleh (lihat [`docs/AI.md`](docs/AI.md#lisensi)) |
 | OWL-ViT base-patch32 (`google/owlvit-base-patch32`) | Apache-2.0 |
 | timm, FastAPI, OpenCV, PyTorch, Next.js, Supabase | Apache-2.0 / MIT / BSD (lihat masing-masing paket) |
 | DogFaceNet (evaluasi, foto demo) | CC BY 4.0 — Mougeot, Li, Jia, PRICAI 2019 |
@@ -188,4 +188,4 @@ Rincian dan URL sumber: [`docs/AI.md`](docs/AI.md#lisensi).
 
 ## Dokumen lain
 
-[`docs/AI.md`](docs/AI.md) · [`docs/EVALUATION.md`](docs/EVALUATION.md) · [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) · [`docs/PRIVACY.md`](docs/PRIVACY.md) · [`docs/DECISIONS.md`](docs/DECISIONS.md) · [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md) · [`docs/screenshots/`](docs/screenshots/)
+[`docs/AI.md`](docs/AI.md) · [`docs/EVALUATION.md`](docs/EVALUATION.md) · [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) · [`docs/PRIVACY.md`](docs/PRIVACY.md) · [`docs/DECISIONS.md`](docs/DECISIONS.md) · [`docs/DEPLOY.md`](docs/DEPLOY.md) · [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md) · [`docs/screenshots/`](docs/screenshots/)

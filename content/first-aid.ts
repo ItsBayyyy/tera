@@ -1,7 +1,7 @@
 /**
  * REVIEW REQUIRED: this first-aid text has not yet been reviewed by a health professional.
  * It must be checked (e.g. by Dinas Kesehatan / a Rabies Center doctor) before public launch.
- * Tracked in MORNING_TODO.md.
+ * Flip FIRST_AID_REVIEWED to true after that review (see docs/DEPLOY.md).
  */
 export const FIRST_AID_REVIEWED = false;
 

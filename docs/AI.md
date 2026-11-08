@@ -65,7 +65,7 @@ Lihat [`EVALUATION.md`](EVALUATION.md) untuk tabel lengkap. Hasil utama (foto me
 
 | Komponen | Lisensi | Sumber | Status |
 |---|---|---|---|
-| MiewID msv3 (bobot) | **Tidak dinyatakan** (tidak ada field lisensi di kartu HF, tidak ada file LICENSE) | https://huggingface.co/conservationxlabs/miewid-msv3 | ⚠ Belum pasti — lihat `MORNING_TODO.md` |
+| MiewID msv3 (bobot) | **Tidak dinyatakan** (tidak ada field lisensi di kartu HF, tidak ada file LICENSE) | https://huggingface.co/conservationxlabs/miewid-msv3 | ⚠ Belum pasti — lihat [`DEPLOY.md`](DEPLOY.md#7-sebelum-dipakai-publik) |
 | MiewID (kode, wbia-plugin-miew-id) | **Tidak dinyatakan** (GitHub tidak mendeteksi lisensi; README: "Copyright Conservation X Labs 2025") | https://github.com/WildMeOrg/wbia-plugin-miew-id | ⚠ Belum pasti |
 | OWL-ViT base-patch32 | Apache-2.0 | https://huggingface.co/google/owlvit-base-patch32 | OK |
 | OWLv2 (dievaluasi, tidak dipakai) | Apache-2.0 | https://huggingface.co/google/owlv2-base-patch16-ensemble | — |
