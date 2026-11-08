@@ -9,6 +9,7 @@
 @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/PlusJakartaSans-700.woff2") format("woff2"); font-weight: 700; }
 @font-face { font-family: "Plus Jakarta Sans"; src: url("fonts/PlusJakartaSans-800.woff2") format("woff2"); font-weight: 800; }
 
+/* Same palette as the app: navy for officers and the product, red for citizens and emergencies. */
 :root {
   --ink: #1b1915;
   --muted: #4f4a41;
@@ -16,9 +17,14 @@
   --line: #ddd8cd;
   --line-strong: #b9b2a3;
   --sunken: #f4f2ed;
+  --canvas: #f7f5f0;
   --accent: #1f4f7a;
+  --accent-deep: #173d5f;
   --accent-soft: #e3ecf4;
+  --danger: #b3261e;
+  --danger-soft: #fbe7e5;
   --ok: #17603a;
+  --ok-soft: #e2f1e7;
   --wait-soft: #fbefd5;
   --wait-line: #e2b45c;
 }
@@ -41,7 +47,7 @@ body {
   position: relative;
   width: 210mm;
   height: 297mm;
-  padding: 15mm 16mm 14mm;
+  padding: 16mm 16mm 14mm;
   overflow: hidden;
   break-after: page;
   display: flex;
@@ -50,29 +56,42 @@ body {
 .page:last-child { break-after: auto; }
 .content { flex: 1; min-height: 0; overflow: hidden; }
 
+/* Running header and footer */
 .run {
-  position: absolute; top: 7mm; left: 16mm; right: 16mm;
+  position: absolute; top: 6.5mm; left: 16mm; right: 16mm;
+  display: flex; justify-content: space-between; align-items: center;
   font-size: 7.5pt; color: var(--faint);
-  border-bottom: 0.5pt solid var(--line); padding-bottom: 1.2mm;
+  border-bottom: 0.5pt solid var(--line); padding-bottom: 1.4mm;
 }
+.run-brand { display: inline-flex; align-items: center; gap: 1.6mm; font-weight: 700; color: var(--accent); font-size: 8pt; }
+.run-brand img { width: 4.2mm; height: 4.2mm; border-radius: 1mm; }
 .pg {
-  position: absolute; bottom: 7mm; left: 16mm; right: 16mm;
-  font-size: 8pt; color: var(--faint); text-align: right;
+  position: absolute; bottom: 6.5mm; left: 16mm; right: 16mm;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 7.5pt; color: var(--faint);
+}
+.pg-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 6mm; height: 5mm; padding: 0 1.5mm; border-radius: 2.5mm;
+  background: var(--accent); color: #fff; font-weight: 700; font-size: 7.5pt;
   font-variant-numeric: tabular-nums;
 }
 
+/* Headings */
 h1, h2, h3 { margin: 0; line-height: 1.2; }
 h2 {
-  font-size: 13pt; font-weight: 800; color: var(--ink);
-  margin: 4.5mm 0 2mm; display: flex; align-items: baseline; gap: 2.5mm;
+  font-size: 13.5pt; font-weight: 800; color: var(--ink);
+  margin: 4.2mm 0 2.2mm; padding-bottom: 1.5mm;
+  display: flex; align-items: center; gap: 2.6mm;
+  border-bottom: 1.2pt solid var(--accent-soft);
 }
 .content > h2:first-child { margin-top: 0; }
 h2 .num {
   display: inline-flex; align-items: center; justify-content: center;
-  min-width: 6mm; height: 6mm; padding: 0 1.2mm; border-radius: 1.2mm;
-  background: var(--accent); color: #fff; font-size: 10pt;
+  width: 7mm; height: 7mm; border-radius: 1.8mm;
+  background: var(--accent); color: #fff; font-size: 10.5pt;
 }
-h3 { font-size: 10.5pt; font-weight: 700; margin: 3.5mm 0 1.5mm; }
+h3 { font-size: 10.5pt; font-weight: 700; margin: 3.5mm 0 1.5mm; color: var(--accent-deep); }
 p { margin: 0 0 2mm; }
 strong { font-weight: 700; }
 code { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 600; font-size: 0.92em; color: var(--accent); }
@@ -81,35 +100,81 @@ code { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 600; font-size
 
 mark.isi { background: #ffe066; color: var(--ink); padding: 0 0.8mm; border-radius: 0.6mm; font-weight: 600; }
 
+/* Stat tiles: hero numbers in ink, identity carried by the coloured edge and the label. */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 2.5mm 0 3mm; }
+.stat { background: var(--canvas); border-radius: 2mm; padding: 2.6mm 3mm 2.4mm; border-top: 1.2mm solid var(--accent); }
+.stat.warga { border-top-color: var(--danger); }
+.stat-num { font-size: 20pt; font-weight: 800; letter-spacing: -0.01em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.stat-label { font-size: 8.4pt; line-height: 1.3; margin-top: 1.2mm; color: var(--ink); }
+.stat-src { font-size: 7pt; color: var(--faint); margin-top: 1.2mm; }
+
+/* Coverage progress toward the provincial target */
+.progress { margin: 0 0 3mm; }
+.progress-track { position: relative; height: 4mm; background: var(--sunken); border-radius: 2mm; }
+.progress-fill { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 2mm; }
+.progress-mark { position: absolute; top: -1.2mm; bottom: -1.2mm; width: 0.6mm; background: var(--ink); border-radius: 0.3mm; }
+.progress-legend { position: relative; height: 4.2mm; font-size: 7.6pt; color: var(--muted); margin-top: 1.2mm; }
+.progress-legend span { position: absolute; top: 0; white-space: nowrap; }
+.progress-legend b { color: var(--ink); }
+
 /* Tables */
 table.data { width: 100%; border-collapse: collapse; margin: 1.5mm 0 2.5mm; font-size: 8.8pt; line-height: 1.35; }
 table.data th, table.data td { border-bottom: 0.5pt solid var(--line); padding: 1.3mm 1.6mm; text-align: left; vertical-align: top; }
-table.data thead th { background: var(--sunken); font-weight: 700; border-bottom: 0.75pt solid var(--line-strong); }
-table.data tbody th { font-weight: 700; background: transparent; }
+table.data thead th { background: var(--accent); color: #fff; font-weight: 700; border-bottom: none; }
+table.data thead th:first-child { border-top-left-radius: 1.5mm; }
+table.data thead th:last-child { border-top-right-radius: 1.5mm; }
+table.data tbody th { font-weight: 700; background: transparent; color: var(--accent-deep); }
+table.data tbody tr:nth-child(even) td, table.data tbody tr:nth-child(even) th { background: #fbfaf7; }
 table.data .r { text-align: right; white-space: nowrap; }
 table.compact th, table.compact td { padding: 1mm 1.6mm; }
+/* Column that describes Tera itself in the comparison table */
+table.data td.us { background: var(--accent-soft) !important; color: var(--accent-deep); font-weight: 600; }
+table.data thead th.us { background: var(--accent-deep); }
+
+/* In-cell bar: one series, one hue, value written beside it. */
+.cellbar { display: flex; align-items: center; gap: 1.6mm; justify-content: flex-end; }
+.cellbar i { display: block; height: 1.8mm; width: 13mm; background: var(--sunken); border-radius: 0.9mm; overflow: hidden; }
+.cellbar i b { display: block; height: 100%; background: var(--accent); border-radius: 0.9mm; }
 
 .tag { display: inline-block; font-size: 7.5pt; font-weight: 700; color: var(--muted); background: var(--sunken); border-radius: 1mm; padding: 0.2mm 1.4mm; white-space: nowrap; }
 .tag.core { color: #fff; background: var(--accent); }
+.tag.warga { color: #fff; background: var(--danger); }
 
 /* Boxes */
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin: 1.5mm 0 2.5mm; }
-.box { border: 0.75pt solid var(--line); border-radius: 2mm; padding: 2.6mm 3mm; font-size: 9.6pt; }
+.box { border: 0.75pt solid var(--line); border-radius: 2mm; padding: 2.6mm 3mm; font-size: 9.6pt; border-top: 1.2mm solid var(--accent); }
+.box.warga { border-top-color: var(--danger); }
 .box p:last-child { margin-bottom: 0; }
 .box-title { font-weight: 700; color: var(--accent); margin-bottom: 1.2mm; }
-ol.steps { margin: 0; padding-left: 4.5mm; }
-ol.steps li { margin-bottom: 0.9mm; }
+.box.warga .box-title { color: var(--danger); }
+
+/* Journey cards with a solid header */
+.flow { border-radius: 2.2mm; overflow: hidden; border: 0.75pt solid var(--line); font-size: 9.5pt; background: #fff; }
+.flow-head { background: var(--accent); color: #fff; font-weight: 700; padding: 2mm 3mm; display: flex; justify-content: space-between; align-items: baseline; }
+.flow-head small { font-weight: 500; font-size: 8pt; opacity: 0.9; }
+.flow.warga .flow-head { background: var(--danger); }
+.flow ol { list-style: none; margin: 0; padding: 2.4mm 3mm 2.2mm; counter-reset: s; }
+.flow li { counter-increment: s; position: relative; padding-left: 7mm; margin-bottom: 1.4mm; }
+.flow li:last-child { margin-bottom: 0; }
+.flow li::before {
+  content: counter(s); position: absolute; left: 0; top: 0.1mm;
+  width: 4.8mm; height: 4.8mm; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent); font-weight: 800; font-size: 7.8pt;
+  display: flex; align-items: center; justify-content: center;
+}
+.flow.warga li::before { background: var(--danger-soft); color: var(--danger); }
+
 ul.tight { margin: 0; padding-left: 4.5mm; }
 ul.tight li { margin-bottom: 1mm; }
 
-.callout { border-left: 1mm solid var(--accent); background: var(--accent-soft); padding: 2mm 3mm; margin: 0 0 2mm; border-radius: 0 1.5mm 1.5mm 0; font-size: 9.6pt; }
+.callout { border-left: 1.2mm solid var(--accent); background: var(--accent-soft); padding: 2.2mm 3.2mm; margin: 0 0 2mm; border-radius: 0 2mm 2mm 0; font-size: 9.6pt; }
 .callout.warn { border-left-color: var(--wait-line); background: var(--wait-soft); }
 .callout p { margin: 0; }
 
 /* Figures */
 figure { margin: 2mm 0 2.5mm; }
-figcaption { font-size: 8pt; color: var(--muted); margin-top: 1mm; line-height: 1.35; }
-.fn { font-weight: 700; color: var(--ink); }
+figcaption { font-size: 8pt; color: var(--muted); margin-top: 1.2mm; line-height: 1.35; }
+.fn { font-weight: 700; color: var(--accent); }
 svg.diagram { width: 100%; height: auto; display: block; }
 svg.diagram .n rect { fill: #fff; stroke: var(--line-strong); stroke-width: 1.2; }
 svg.diagram .n.a rect { fill: var(--accent-soft); stroke: var(--accent); }
@@ -121,26 +186,57 @@ svg.diagram text.left { text-anchor: start; }
 svg.diagram .l { stroke: var(--muted); stroke-width: 1.3; fill: none; }
 svg.diagram .dash { stroke-dasharray: 4 3; }
 
-.shots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 2mm 0 1.5mm; align-items: start; }
+/* App screenshots as screen cards */
+.shots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3.2mm; margin: 2.5mm 0 1.5mm; align-items: start; }
 .shots figure { margin: 0; }
-.shots img { width: 100%; display: block; border: 0.75pt solid var(--line); border-radius: 1.5mm; background: #f7f5f0; }
-.shots img.crop { height: 52mm; object-fit: cover; object-position: top; }
+.shot-tag { display: inline-block; font-size: 6.8pt; font-weight: 700; color: #fff; background: var(--accent); border-radius: 1mm; padding: 0.3mm 1.4mm; margin-bottom: 1.2mm; }
+.shot-tag.warga { background: var(--danger); }
+.shots img {
+  width: 100%; display: block; border-radius: 2.4mm; background: var(--canvas);
+  border: 0.9mm solid #1b1915; box-shadow: 0 0.8mm 2.4mm rgba(27, 25, 21, 0.18);
+}
+.shots img.crop { height: 40mm; object-fit: cover; object-position: top; }
 .shots img.fit { height: auto; }
 
+/* Submission links */
+.links { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 4mm; background: var(--canvas); border-radius: 2mm; padding: 2.6mm 3.2mm; font-size: 9pt; }
+.links dt { font-weight: 700; color: var(--accent-deep); font-size: 7.8pt; text-transform: uppercase; letter-spacing: 0.04em; }
+.links dd { margin: 0.4mm 0 0; }
+
 /* Cover */
-.cover { padding: 22mm 22mm 20mm; justify-content: space-between; }
-.cover .eyebrow { font-size: 9.5pt; font-weight: 600; color: var(--accent); letter-spacing: 0.02em; margin: 0; }
-.cover-main { margin-top: 28mm; }
-.cover-logo { width: 26mm; height: 26mm; display: block; margin-bottom: 7mm; }
-.cover h1 { font-size: 44pt; font-weight: 800; letter-spacing: -0.02em; }
-.cover-sub { font-size: 15pt; line-height: 1.35; color: var(--muted); max-width: 150mm; margin-top: 4mm; }
-.cover-table { width: 100%; border-collapse: collapse; font-size: 10pt; margin-top: auto; }
-.cover-table th { text-align: left; width: 38mm; color: var(--muted); font-weight: 600; padding: 2mm 0; border-top: 0.5pt solid var(--line); vertical-align: top; }
-.cover-table td { padding: 2mm 0; border-top: 0.5pt solid var(--line); }
+.cover { padding: 0; }
+.cover-hero {
+  position: relative; height: 178mm; background: var(--accent); color: #fff;
+  padding: 20mm 20mm 0;
+}
+.cover .eyebrow { font-size: 9pt; font-weight: 600; letter-spacing: 0.03em; margin: 0; opacity: 0.85; }
+.cover-logo {
+  width: 24mm; height: 24mm; display: block; margin-top: 22mm;
+  border-radius: 5.5mm; box-shadow: 0 0 0 1.4mm rgba(255, 255, 255, 0.22);
+}
+.cover h1 { font-size: 54pt; font-weight: 800; letter-spacing: -0.03em; margin-top: 7mm; line-height: 1; }
+.cover-sub { font-size: 14pt; line-height: 1.35; max-width: 92mm; margin-top: 4mm; opacity: 0.95; }
+.cover-chips { display: flex; gap: 2mm; margin-top: 6mm; flex-wrap: wrap; max-width: 95mm; }
+.cover-chips span { font-size: 8.5pt; font-weight: 700; border: 0.5mm solid rgba(255, 255, 255, 0.55); border-radius: 4mm; padding: 1mm 3mm; }
+.phone {
+  position: absolute; width: 50mm; height: 104mm; border-radius: 7mm;
+  background: #111; padding: 1.8mm; box-shadow: 0 3mm 8mm rgba(0, 0, 0, 0.3);
+}
+.phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 5.4mm; display: block; background: #fff; }
+.phone.phone-a { right: 52mm; top: 74mm; }
+.phone.phone-b { right: 16mm; top: 92mm; }
+.phone-cap { position: absolute; font-size: 7.6pt; font-weight: 700; color: var(--muted); text-align: center; width: 50mm; }
+.phone-cap.phone-a { right: 52mm; top: 180mm; }
+.phone-cap.phone-b { right: 16mm; top: 198mm; }
+.cover-info { position: absolute; left: 20mm; right: 20mm; bottom: 18mm; }
+.cover-info h2 { font-size: 9pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); border: none; padding: 0; margin: 0 0 2mm; }
+.cover-table { width: 100%; border-collapse: collapse; font-size: 9.6pt; }
+.cover-table th { text-align: left; width: 34mm; color: var(--muted); font-weight: 600; padding: 1.7mm 0; border-top: 0.5pt solid var(--line); vertical-align: top; }
+.cover-table td { padding: 1.7mm 0; border-top: 0.5pt solid var(--line); font-weight: 600; }
 
 /* Appendix */
 .appendix table.disclosure { font-size: 8.4pt; }
-.appendix table.disclosure tbody th { width: 24%; color: var(--ink); }
-.statement { margin-top: 3mm; padding: 2.5mm 3mm; border: 0.75pt solid var(--line-strong); border-radius: 1.5mm; font-size: 9pt; }
+.appendix table.disclosure tbody th { width: 24%; }
+.statement { margin-top: 3mm; padding: 2.6mm 3.2mm; border-left: 1.2mm solid var(--accent); background: var(--accent-soft); border-radius: 0 2mm 2mm 0; font-size: 9pt; }
 ol.refs { padding-left: 5mm; margin: 0; font-size: 9pt; }
 ol.refs li { margin-bottom: 2mm; overflow-wrap: anywhere; }
