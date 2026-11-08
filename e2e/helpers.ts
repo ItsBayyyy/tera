@@ -28,7 +28,7 @@ export async function resetE2eBanjar() {
 
 export async function login(page: Page, who: "petugas" | "admin" = "petugas") {
   await page.goto("/masuk?lanjut=/petugas");
-  await page.getByLabel("Email").fill(`${who}@kenalasu.test`);
+  await page.getByLabel("Email").fill(`${who}@tera.test`);
   await page.getByLabel("Kata sandi").fill(`${who}-lokal-123`);
   await page.getByRole("button", { name: "Masuk" }).click();
   await expect(page).toHaveURL(/\/petugas$/);

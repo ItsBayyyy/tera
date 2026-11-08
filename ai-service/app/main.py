@@ -24,7 +24,7 @@ PipelineFactory = Callable[[Settings], Pipeline]
 MULTIPART_OVERHEAD_BYTES = 64 * 1024
 PUBLIC_PATHS = {"/health"}
 
-log = logging.getLogger("kenalasu.ai")
+log = logging.getLogger("tera.ai")
 
 
 class InMemoryMultiPartParser(MultiPartParser):
@@ -104,7 +104,7 @@ def create_app(settings: Settings | None = None, pipeline_factory: PipelineFacto
         )
         yield
 
-    app = FastAPI(title="KenalAsu AI service", lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
+    app = FastAPI(title="Tera AI service", lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 
     @app.middleware("http")
     async def auth_and_log(request: Request, call_next):

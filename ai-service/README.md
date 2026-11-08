@@ -1,5 +1,5 @@
 ---
-title: KenalAsu AI Service
+title: Tera AI Service
 colorFrom: gray
 colorTo: green
 sdk: docker
@@ -8,9 +8,9 @@ pinned: false
 short_description: Dog photo quality check, detection and re-ID embedding
 ---
 
-# KenalAsu AI service
+# Tera AI service
 
-Stateless FastAPI service used by the KenalAsu Next.js route handlers. For one dog photo it
+Stateless FastAPI service used by the Tera Next.js route handlers. For one dog photo it
 returns a quality verdict, the detected dog head box and a MiewID re-identification
 embedding. **Matching is not done here**: the embedding is stored and compared in
 Postgres/pgvector (`match_dogs()`). Uploaded photos and embeddings are never written to
@@ -184,8 +184,8 @@ Tests (from `ai-service/`):
 ## Docker / Hugging Face Spaces
 
 ```bash
-docker build -t kenalasu-ai ai-service
-docker run --rm -p 7860:7860 -e AI_SERVICE_KEY=change-me kenalasu-ai
+docker build -t tera-ai ai-service
+docker run --rm -p 7860:7860 -e AI_SERVICE_KEY=change-me tera-ai
 ```
 
 The image is CPU-only (`python:3.11-slim`, CPU torch wheels), runs as non-root uid 1000 and listens on

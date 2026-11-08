@@ -51,7 +51,7 @@ beforeAll(async () => {
   if (error) throw error;
   [banjarA, banjarB] = [banjars[0].id, banjars[1].id];
   const { error: signInError } = await officer.auth.signInWithPassword({
-    email: "petugas@kenalasu.test",
+    email: "petugas@tera.test",
     password: "petugas-lokal-123",
   });
   if (signInError) throw signInError;

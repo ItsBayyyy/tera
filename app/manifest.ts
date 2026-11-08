@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "KenalAsu",
-    short_name: "KenalAsu",
+    name: "Tera",
+    short_name: "Tera",
     description: "Panduan darurat gigitan anjing dan alat scan vaksinasi rabies di Bali.",
     start_url: "/",
     display: "standalone",

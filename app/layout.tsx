@@ -11,11 +11,11 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "KenalAsu",
-    template: "%s · KenalAsu",
+    default: "Tera",
+    template: "%s · Tera",
   },
   description: "Pengendalian rabies di Bali: panduan darurat gigitan anjing untuk warga dan alat scan vaksinasi untuk petugas.",
-  applicationName: "KenalAsu",
+  applicationName: "Tera",
 };
 
 export const viewport: Viewport = {

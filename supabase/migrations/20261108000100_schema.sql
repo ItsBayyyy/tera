@@ -1,4 +1,4 @@
--- KenalAsu core schema.
+-- Tera core schema.
 -- Embedding dimension 2152 comes from the real MiewID msv3 output (efficientnetv2_rw_m, use_fc=false).
 -- pgvector caps HNSW on `vector` at 2000 dims, so embeddings are stored as `halfvec`.
 

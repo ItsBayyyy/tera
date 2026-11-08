@@ -1,4 +1,4 @@
-# AI di KenalAsu
+# AI di Tera
 
 AI produk = **computer vision** di layanan milik sendiri (`ai-service/`, FastAPI, CPU). Tidak ada LLM dan tidak ada API AI pihak ketiga. Detail teknis lengkap (kalibrasi, cara menjalankan, Docker) ada di [`ai-service/README.md`](../ai-service/README.md); hasil evaluasi di [`EVALUATION.md`](EVALUATION.md). Semua angka di bawah diukur di repo ini pada 8 Nov 2026 (laptop Intel Core generasi 11, 12 thread, CPU saja, torch 6 thread).
 

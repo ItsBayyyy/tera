@@ -1,4 +1,6 @@
-# KenalAsu
+# Tera
+
+*Tera* (KBBI): cap atau tanda resmi. Setiap anjing yang divaksin mendapat "tera" digital — identitas yang bisa dicek ulang dari fotonya.
 
 Aplikasi web (PWA, mobile-first) untuk pengendalian rabies di Bali. **Petugas vaksinator** memotret wajah anjing; AI mengenali anjing yang sudah terdaftar dan menampilkan status vaksinnya. **Warga yang digigit anjing** langsung mendapat panduan pertolongan pertama, tombol darurat, dan arahan ke fasilitas kesehatan — tanpa login.
 
@@ -13,7 +15,7 @@ Aplikasi web (PWA, mobile-first) untuk pengendalian rabies di Bali. **Petugas va
 
 ## Masalah
 
-Bali mencatat **66.760 kasus gigitan** dan **16 kematian rabies** pada 2025 (Dinkes Bali via ANTARA Bali, 9 Jan 2026). Cakupan vaksinasi anjing **49,51%** per 17 Juli 2026 (Bali Post). Dua hambatan lapangan yang disasar KenalAsu:
+Bali mencatat **66.760 kasus gigitan** dan **16 kematian rabies** pada 2025 (Dinkes Bali via ANTARA Bali, 9 Jan 2026). Cakupan vaksinasi anjing **49,51%** per 17 Juli 2026 (Bali Post). Dua hambatan lapangan yang disasar Tera:
 
 1. **Petugas tidak tahu apakah anjing di depannya sudah divaksin.** Anjing kampung jarang berkalung atau bertanda; vaksinasi ulang atau terlewat terjadi karena identitas anjing tidak bisa dicek di tempat.
 2. **Korban gigitan panik dan tidak tahu langkah pertama.** Cuci luka segera dan datang ke faskes hari itu adalah langkah yang paling menentukan.
@@ -142,7 +144,7 @@ cd ai-service && cp .env.example .env    # isi AI_SERVICE_KEY = nilai yang sama 
 
 Pertama kali mengunduh ±0,8 GB bobot model ke `ai-service/.cache/`. Data demo: isi `data/demo/<nama_anjing>/*.jpg` lalu `ai-service/.venv/Scripts/python scripts/seed_demo.py`. Evaluasi: lihat `docs/EVALUATION.md`.
 
-Akun lokal: `petugas@kenalasu.test` dan `admin@kenalasu.test` (kata sandi di `supabase/seed.sql`, hanya untuk stack lokal).
+Akun lokal: `petugas@tera.test` dan `admin@tera.test` (kata sandi di `supabase/seed.sql`, hanya untuk stack lokal).
 
 Pemeriksaan:
 

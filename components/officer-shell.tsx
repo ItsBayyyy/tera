@@ -30,7 +30,7 @@ function OfficerHeader() {
     <header className="border-b border-line bg-surface">
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-2 px-4 pt-3">
         <Link href="/petugas" className="text-lg font-bold">
-          KenalAsu <span className="font-medium text-ink-muted">Petugas</span>
+          Tera <span className="font-medium text-ink-muted">Petugas</span>
         </Link>
         <button
           type="button"

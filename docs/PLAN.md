@@ -1,4 +1,4 @@
-# PLAN — KenalAsu MVP
+# PLAN — Tera MVP
 
 Rencana kerja yang disesuaikan dengan kondisi repo dan mesin nyata (audit 8 Nov 2026).
 
@@ -17,7 +17,7 @@ Rencana kerja yang disesuaikan dengan kondisi repo dan mesin nyata (audit 8 Nov 
 
 ## Catatan konflik instruksi
 
-`CLAUDE.md` di folder induk (`Downloads/`) adalah aturan proyek lain (Bursa Metana, HTML/CSS/JS murni). Itu tidak berlaku untuk KenalAsu; yang berlaku adalah `KENALASU_BUILD_PROMPT.md`. Dicatat di `docs/DECISIONS.md`.
+`CLAUDE.md` di folder induk (`Downloads/`) adalah aturan proyek lain (Bursa Metana, HTML/CSS/JS murni). Itu tidak berlaku untuk Tera; yang berlaku adalah `KENALASU_BUILD_PROMPT.md`. Dicatat di `docs/DECISIONS.md`.
 
 ## Rencana milestone
 

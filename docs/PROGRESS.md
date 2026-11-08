@@ -59,7 +59,7 @@ ai-service/.venv/Scripts/python scripts/seed_demo.py   # butuh data/demo/
 npm run dev
 ```
 
-Akun lokal: `petugas@kenalasu.test`, `admin@kenalasu.test` (kata sandi di `supabase/seed.sql`).
+Akun lokal: `petugas@tera.test`, `admin@tera.test` (kata sandi di `supabase/seed.sql`).
 
 ### MORNING_TODO (urut paling mendesak)
 

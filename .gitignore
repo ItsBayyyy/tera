@@ -40,7 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# KenalAsu
+# Tera
 /data/
 /test-results/
 /playwright-report/

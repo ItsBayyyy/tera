@@ -4,7 +4,7 @@ Setiap keputusan yang tidak ditetapkan eksplisit oleh `KENALASU_BUILD_PROMPT.md`
 
 ## Lingkungan & proses
 
-- **D1 — `CLAUDE.md` di folder induk tidak berlaku.** File `Downloads/CLAUDE.md` adalah aturan proyek lain (Bursa Metana, HTML murni tanpa framework). KenalAsu mengikuti build prompt-nya sendiri (Next.js + Supabase + FastAPI).
+- **D1 — `CLAUDE.md` di folder induk tidak berlaku.** File `Downloads/CLAUDE.md` adalah aturan proyek lain (Bursa Metana, HTML murni tanpa framework). Tera mengikuti build prompt-nya sendiri (Next.js + Supabase + FastAPI).
 - **D2 — Root repo = `frontend/`.** Folder `frontend/` sudah berisi repo git Next.js; build prompt menyebut "Next.js sudah ada di root repo". Semua folder (`ai-service/`, `supabase/`, `scripts/`, `docs/`) diletakkan di dalamnya.
 - **D3 — Tetap memakai konfigurasi bawaan scaffold Next 16** (`cacheComponents`, `partialPrefetching`). Halaman berbasis data dibuat sebagai Client Component yang membaca Supabase lewat klien browser (RLS) sehingga shell statis tetap bisa di-prerender; data request-time di route handler memakai `connection()`.
 - **D4 — Supabase CLI dipasang sebagai devDependency** (`npx supabase`), bukan global, agar tidak mengubah konfigurasi sistem. Layanan lokal yang tidak dipakai (analytics, edge runtime, vector bucket, SMTP) dimatikan di `supabase/config.toml`; `enable_signup = false` karena akun petugas dibuat admin.
@@ -36,3 +36,7 @@ Setiap keputusan yang tidak ditetapkan eksplisit oleh `KENALASU_BUILD_PROMPT.md`
 - **D21 — Ambang default diganti ke 0,667 / 0,39** (migrasi `20261108000400`) mengikuti rekomendasi `scripts/eval.py` pada foto mentah DogFaceNet — set yang paling mirip foto lapangan. Hanya baris yang belum diubah admin yang diganti; tetap ditandai "sementara".
 - **D22 — Bobot model dimasukkan ke image Docker saat build** dan container berjalan dengan `HF_HUB_OFFLINE=1`, agar Space yang bangun dari tidur tidak bergantung pada unduhan ulang.
 - **D23 — Screenshot dikompres ke PNG 256 warna** (26 MB → 10 MB) agar repo tetap ringan; cukup untuk tinjauan visual.
+
+## Nama
+
+- **D24 — Aplikasi diganti nama dari KenalAsu menjadi Tera** atas permintaan pemilik (KBBI: *tera* = cap/tanda resmi). Semua nama tampilan, identifier internal (nama paket, logger, cache service worker, `project_id` Supabase lokal, domain akun uji `tera.test`) ikut diganti. Rujukan ke file `KENALASU_BUILD_PROMPT.md` dibiarkan karena itu nama file aslinya; nama folder induk `KenalAsu/` di luar repo tidak diubah.

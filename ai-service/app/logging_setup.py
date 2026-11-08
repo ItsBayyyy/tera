@@ -25,7 +25,7 @@ class JsonFormatter(logging.Formatter):
 
 
 def configure_logging(level: int = logging.INFO) -> None:
-    logger = logging.getLogger("kenalasu")
+    logger = logging.getLogger("tera")
     if any(isinstance(h.formatter, JsonFormatter) for h in logger.handlers):
         return
     handler = logging.StreamHandler(sys.stdout)

@@ -1,4 +1,4 @@
-# KenalAsu AI service — CPU image for Hugging Face Spaces (sdk: docker) or any container host.
+# Tera AI service — CPU image for Hugging Face Spaces (sdk: docker) or any container host.
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \

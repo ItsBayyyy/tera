@@ -10,9 +10,9 @@ import numpy as np
 import pytest
 
 # scripts/eval.py is a script, not a package module; load it by path (its name shadows the builtin).
-_spec = importlib.util.spec_from_file_location("kenalasu_eval", Path(__file__).resolve().parents[1] / "eval.py")
+_spec = importlib.util.spec_from_file_location("tera_eval", Path(__file__).resolve().parents[1] / "eval.py")
 ev = importlib.util.module_from_spec(_spec)
-sys.modules["kenalasu_eval"] = ev
+sys.modules["tera_eval"] = ev
 _spec.loader.exec_module(ev)
 
 

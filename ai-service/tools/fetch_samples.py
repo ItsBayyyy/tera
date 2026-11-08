@@ -21,7 +21,7 @@ import httpx
 
 API = "https://commons.wikimedia.org/w/api.php"
 # Wikimedia wants a descriptive User-Agent and answered 403 to httpx's default br/zstd Accept-Encoding.
-HEADERS = {"User-Agent": "KenalAsu-dev/0.1 (local test fixtures)", "Accept-Encoding": "gzip"}
+HEADERS = {"User-Agent": "Tera-dev/0.1 (local test fixtures)", "Accept-Encoding": "gzip"}
 THUMB_WIDTH = 1024  # matches the PWA, which re-encodes photos to <=1024 px before upload
 
 # name -> (Commons file title, role). "dog" photos show a dog face; "not_dog" must not.

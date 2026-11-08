@@ -72,7 +72,7 @@ function Coverage() {
         Cakupan vaksin per banjar
       </h2>
       <p className="text-ink-muted">
-        Dihitung dari anjing yang terdaftar di KenalAsu, bukan populasi anjing sebenarnya. Tervaksin = vaksin dalam periode aktif.
+        Dihitung dari anjing yang terdaftar di Tera, bukan populasi anjing sebenarnya. Tervaksin = vaksin dalam periode aktif.
       </p>
       {rows === null ? <ListSkeleton rows={3} label="Memuat cakupan" /> : null}
       {rows === "error" ? <ErrorState title="Cakupan belum bisa dimuat." onRetry={() => void load()} /> : null}

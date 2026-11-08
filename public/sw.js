@@ -1,5 +1,5 @@
-// KenalAsu service worker: keeps the citizen emergency guide readable without a signal.
-const CACHE = "kenalasu-v1";
+// Tera service worker: keeps the citizen emergency guide readable without a signal.
+const CACHE = "tera-v1";
 const PRECACHE = ["/darurat"];
 
 self.addEventListener("install", (event) => {

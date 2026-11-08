@@ -6,7 +6,7 @@ Kode, migrasi database, test, dan dokumentasi repo ini ditulis dengan bantuan AI
 
 ## 2. AI di dalam produk
 
-AI di KenalAsu adalah **computer vision**, bukan model bahasa (LLM). Tidak ada chatbot dan tidak ada teks yang dibangkitkan AI di produk.
+AI di Tera adalah **computer vision**, bukan model bahasa (LLM). Tidak ada chatbot dan tidak ada teks yang dibangkitkan AI di produk.
 
 | Tahap | Komponen | Berjalan di |
 |---|---|---|

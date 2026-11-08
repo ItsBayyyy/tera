@@ -28,7 +28,7 @@ type OfficerContextValue = {
 };
 
 const OfficerContext = createContext<OfficerContextValue | null>(null);
-const BANJAR_KEY = "kenalasu.activeBanjar";
+const BANJAR_KEY = "tera.activeBanjar";
 
 export function OfficerProvider({ children }: { children: ReactNode }) {
   const router = useRouter();

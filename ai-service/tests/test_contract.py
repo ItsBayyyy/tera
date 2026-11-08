@@ -139,7 +139,7 @@ def test_request_log_has_no_image_or_embedding(client, auth):
             records.append(record)
 
     handler = Collect()
-    logger = logging.getLogger("kenalasu.ai")
+    logger = logging.getLogger("tera.ai")
     logger.addHandler(handler)
     try:
         post_image(client, jpeg_bytes(with_red_dog(textured())), {**auth, "X-Request-Id": "req-123"})

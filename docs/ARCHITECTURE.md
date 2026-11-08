@@ -1,4 +1,4 @@
-# Arsitektur KenalAsu
+# Arsitektur Tera
 
 ```mermaid
 flowchart LR

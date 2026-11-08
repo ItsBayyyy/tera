@@ -1,4 +1,4 @@
-# Privasi KenalAsu
+# Privasi Tera
 
 | Data | Perlakuan | Di mana di kode |
 |---|---|---|
