@@ -1,38 +1,22 @@
-# Pernyataan Penggunaan AI
+# AI & Technology Disclosure
 
-## 1. AI dalam pembuatan kode
+Format mengikuti Lampiran C *Panduan Peserta AI Web Innovation Challenge Bali DigiFest 2026*. Isinya identik dengan Lampiran A proposal Tahap 1 (`docs/proposal/proposal.html`).
 
-Kode, migrasi database, test, dan dokumentasi repo ini ditulis dengan bantuan AI coding assistant **Claude Code** (Anthropic). Tim meninjau, menjalankan, dan bertanggung jawab atas hasilnya. Keputusan desain dicatat di `docs/DECISIONS.md`.
+| Komponen | Isi |
+|---|---|
+| Nama Produk | Tera |
+| Framework / Frontend | Next.js 16.4 (MIT), React 19 (MIT), Tailwind CSS 4 (MIT); PWA dengan service worker |
+| Backend / Runtime | Next.js Route Handlers di Node.js 22 (TypeScript); AI service Python 3.11 dengan FastAPI (MIT) dan Uvicorn (BSD-3-Clause) |
+| Database / Storage | Supabase: PostgreSQL + pgvector (PostgreSQL License), Auth, Storage privat, Realtime |
+| Hosting / Deployment | Rencana: Vercel (web), Supabase cloud (database), Hugging Face Spaces CPU (AI service). Semua tier gratis. |
+| AI Model / API / Method | (1) Quality gate OpenCV (Apache-2.0); (2) deteksi OWL-ViT base-patch32, `google/owlvit-base-patch32` (Apache-2.0); (3) embedding re-identifikasi MiewID msv3, `conservationxlabs/miewid-msv3` (**lisensi tidak dinyatakan pembuat; izin tertulis belum diperoleh**), dimuat dengan timm (Apache-2.0); (4) pencocokan cosine similarity pgvector di fungsi SQL `match_dogs()`. Semua inferensi di AI service milik sendiri. Tidak ada LLM dan tidak ada API AI pihak ketiga. |
+| Peran AI dalam Produk | Mengenali individu anjing dari foto: memeriksa kualitas foto, mendeteksi anjing dan wajahnya, membuat vektor identitas, lalu mencari anjing terdaftar yang paling mirip di banjar yang sama. Hasil ditampilkan dalam tiga zona; keputusan akhir selalu dikonfirmasi petugas. Pada laporan warga, AI hanya memberi saran kandidat anjing untuk petugas. |
+| Dataset / Data Source | DogFaceNet (Mougeot, Li, Jia, PRICAI 2019; CC BY 4.0; zenodo.org/records/12578449) untuk evaluasi dan data demo; foto Wikimedia Commons (CC0/domain publik) untuk kalibrasi dan test; gambar sintetis untuk e2e. Tidak ada data pribadi yang dipakai untuk pelatihan. Statistik rabies dari media yang dikutip di Lampiran B. |
+| Open-source Libraries | @supabase/ssr, @supabase/supabase-js, zod (MIT), lucide-react (ISC); PyTorch, torchvision (BSD-3-Clause), transformers, timm, safetensors, huggingface-hub (Apache-2.0), opencv-python-headless (Apache-2.0), Pillow (MIT-CMU), NumPy (BSD-3-Clause), python-multipart (Apache-2.0), tokenizers (Apache-2.0), Starlette (BSD-3-Clause); untuk pengujian: Vitest (MIT), Playwright (Apache-2.0), pytest (MIT) |
+| Template / Boilerplate | `create-next-app` (commit awal repo "Initial commit from Create Next App") |
+| AI Coding Assistant | Claude Code (Anthropic) dipakai untuk menulis kode, migrasi database, test, dokumentasi, dan draf proposal ini. Tim meninjau, menjalankan, dan bertanggung jawab atas hasilnya; keputusan desain dicatat di `docs/DECISIONS.md`. |
+| Pre-existing Components | Konsep Mode Warga (panduan pertolongan pertama darurat, tombol telepon darurat, ringkasan kasus untuk petugas) dikembangkan dari karya tim sebelumnya, Vishara (FIT Competition 2026); implementasinya ditulis baru. Inti AI re-identifikasi, Mode Petugas, dasbor admin, dan mode demo dikembangkan baru untuk lomba ini. |
+| Third-party Assets / Credits | Font Plus Jakarta Sans (SIL OFL 1.1); ikon lucide-react (ISC); foto DogFaceNet (CC BY 4.0) di mode demo; foto Wikimedia Commons (domain publik): *Kintamani dog white* dan *Street dog-Gianyar Bali-2009* (Imk0278; Jack Merridew). Logo Tera dibuat untuk proyek ini. |
+| Layanan pihak ketiga | Supabase (data operasional), Vercel (lalu lintas web), Hugging Face Spaces (menjalankan AI service milik sendiri; foto diproses di memori dan tidak disimpan), Hugging Face Hub (mengunduh bobot model saat build; tanpa data pengguna). |
 
-## 2. AI di dalam produk
-
-AI di Tera adalah **computer vision**, bukan model bahasa (LLM). Tidak ada chatbot dan tidak ada teks yang dibangkitkan AI di produk.
-
-| Tahap | Komponen | Berjalan di |
-|---|---|---|
-| Pemeriksaan kualitas foto | OpenCV (variance of Laplacian, kecerahan, resolusi) | AI service milik sendiri (`ai-service/`) |
-| Deteksi wajah/kepala anjing | Detektor open-vocabulary (detail & lisensi di `docs/AI.md`) | AI service milik sendiri |
-| Embedding re-identifikasi | MiewID (`conservationxlabs/miewid-msv3`) | AI service milik sendiri |
-| Pencocokan | Cosine similarity `pgvector` di fungsi SQL `match_dogs()` | Postgres (Supabase) milik proyek |
-
-Keputusan akhir selalu di tangan manusia: petugas mengonfirmasi kandidat ("Ya, anjing ini" / "Bukan"), dan kandidat dari laporan warga ditandai "Saran AI, bukan kepastian". Status vaksin anjing tidak pernah ditampilkan ke warga dan tidak dipakai untuk menyatakan korban aman.
-
-## 3. Layanan pihak ketiga
-
-| Layanan | Kegunaan | Data yang dikirim |
-|---|---|---|
-| Supabase (Postgres, Auth, Storage, Realtime) | Database, login petugas, penyimpanan foto privat | Data operasional |
-| Hugging Face Spaces (rencana deploy) | Hosting AI service milik sendiri | Foto yang dianalisis (tidak disimpan) |
-| Hugging Face Hub | Mengunduh bobot model saat build/start | Tidak ada data pengguna |
-| Vercel (rencana deploy) | Hosting aplikasi Next.js | Lalu lintas web |
-| Google Fonts via `next/font` | Font Plus Jakarta Sans diunduh saat build dan disajikan sendiri | Tidak ada data pengguna saat runtime |
-
-Tidak ada API AI pihak ketiga (OpenAI, Gemini, OpenRouter, dll.).
-
-## 4. Asal konsep Mode Warga
-
-Konsep **Mode Warga** (panduan pertolongan pertama darurat, tombol telepon darurat, dan ringkasan kasus untuk petugas) dikembangkan dari karya tim sebelumnya, **Vishara** (FIT Competition 2026). Implementasi di repo ini ditulis baru.
-
-## 5. Sumber dan lisensi data
-
-Lihat `docs/AI.md` (model, detektor, dataset evaluasi, foto contoh) dan `README.md`. Angka konteks rabies Bali di README berasal dari Dinkes Bali via ANTARA Bali (9 Jan 2026) dan Bali Post (17 Juli 2026). Foto uji e2e di `e2e/fixtures/` adalah gambar sintetis buatan skrip.
+**Pernyataan:** Kami menyatakan bahwa informasi di atas benar dan lengkap. Kami bertanggung jawab atas penggunaan teknologi, source code, data, library, API, model AI, dan aset yang digunakan pada produk.

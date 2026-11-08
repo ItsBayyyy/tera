@@ -17,7 +17,7 @@ Aplikasi web (PWA, mobile-first) untuk pengendalian rabies di Bali. **Petugas va
 
 ## Masalah
 
-Bali mencatat **66.760 kasus gigitan** dan **16 kematian rabies** pada 2025 (Dinkes Bali via ANTARA Bali, 9 Jan 2026). Cakupan vaksinasi anjing **49,51%** per 17 Juli 2026 (Bali Post). Dua hambatan lapangan yang disasar Tera:
+Sepanjang 2025, **66.760 orang** di Bali tergigit hewan penular rabies dan **16 korban meninggal**; menurut Dinkes Bali, korban yang meninggal tidak dibawa ke faskes (ANTARA Bali, 9 Jan 2026). Cakupan vaksinasi anjing **49,51%** per 17 Juli 2026 (Bali Post, 20 Jul 2026), sekitar 60% per 20 September dengan target 87% akhir 2026 (Bali Post, 21 Sep 2026). Dua hambatan lapangan yang disasar Tera:
 
 1. **Petugas tidak tahu apakah anjing di depannya sudah divaksin.** Anjing kampung jarang berkalung atau bertanda; vaksinasi ulang atau terlewat terjadi karena identitas anjing tidak bisa dicek di tempat.
 2. **Korban gigitan panik dan tidak tahu langkah pertama.** Cuci luka segera dan datang ke faskes hari itu adalah langkah yang paling menentukan.
@@ -166,7 +166,7 @@ Langkah untuk pemilik repo (Supabase cloud, Vercel, Hugging Face Spaces): [`MORN
 
 | Komponen | Lisensi |
 |---|---|
-| MiewID msv3 (`conservationxlabs/miewid-msv3`) | **Tidak dinyatakan** oleh pembuatnya — sedang dikonfirmasi (lihat `MORNING_TODO.md`) |
+| MiewID msv3 (`conservationxlabs/miewid-msv3`) | **Tidak dinyatakan** oleh pembuatnya; izin tertulis belum diperoleh (lihat `MORNING_TODO.md`) |
 | OWL-ViT base-patch32 (`google/owlvit-base-patch32`) | Apache-2.0 |
 | timm, FastAPI, OpenCV, PyTorch, Next.js, Supabase | Apache-2.0 / MIT / BSD (lihat masing-masing paket) |
 | DogFaceNet (evaluasi, foto demo) | CC BY 4.0 — Mougeot, Li, Jia, PRICAI 2019 |

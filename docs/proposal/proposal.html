@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Tera — Proposal Tahap 1 · AI Web Innovation Challenge Bali DigiFest 2026</title>
+<link rel="stylesheet" href="proposal.css">
+</head>
+<body>
+
+<!-- ============================== COVER ============================== -->
+<section class="page cover">
+  <div class="cover-top">
+    <p class="eyebrow">Proposal Tahap 1 · AI Web Innovation Challenge · Bali DigiFest 2026</p>
+  </div>
+  <div class="cover-main">
+    <img src="../../public/icon.svg" alt="" class="cover-logo">
+    <h1>Tera</h1>
+    <p class="cover-sub">Mengenali anjing dari foto wajahnya untuk vaksinasi rabies, dan memandu warga yang tergigit, di Bali</p>
+  </div>
+  <table class="cover-table">
+    <tr><th>Subtema</th><td>Bali Smart Society</td></tr>
+    <tr><th>Kategori</th><td>Mahasiswa/Umum</td></tr>
+    <tr><th>Nama tim</th><td><mark class="isi">[ISI: nama tim]</mark></td></tr>
+    <tr><th>Ketua tim</th><td><mark class="isi">[ISI: nama ketua]</mark></td></tr>
+    <tr><th>Anggota</th><td><mark class="isi">[ISI: nama anggota 2]</mark>, <mark class="isi">[ISI: nama anggota 3]</mark></td></tr>
+    <tr><th>Institusi</th><td><mark class="isi">[ISI: universitas/komunitas, bila ada]</mark></td></tr>
+    <tr><th>Kontak ketua</th><td><mark class="isi">[ISI: email dan nomor HP ketua]</mark></td></tr>
+    <tr><th>Website (MVP)</th><td><mark class="isi">[ISI: URL website live]</mark></td></tr>
+    <tr><th>Repository</th><td><mark class="isi">[ISI: URL repository GitHub]</mark></td></tr>
+    <tr><th>Versi dinilai</th><td>tag <code>v1.0-submission</code> · <mark class="isi">[ISI: commit hash]</mark></td></tr>
+  </table>
+</section>
+
+<!-- ============================== HALAMAN 1 ============================== -->
+<section class="page">
+  <header class="run">Tera · Proposal Tahap 1</header>
+  <div class="content">
+    <h2><span class="num">1</span>Problem &amp; Background</h2>
+    <p>Sepanjang 2025, <strong class="tab">66.760</strong> orang di Bali tergigit hewan penular rabies dan <strong class="tab">16</strong> korban meninggal. Menurut Dinas Kesehatan Bali, korban yang meninggal tidak dibawa ke fasilitas kesehatan (ANTARA Bali, 9 Jan 2026).</p>
+
+    <table class="data">
+      <thead><tr><th>Cakupan vaksinasi anjing</th><th class="r">Nilai</th><th>Sumber</th></tr></thead>
+      <tbody>
+        <tr><td>Tervaksin per 17 Juli 2026 (data Distan Pangan Bali)</td><td class="r tab">282.683 dari 570.976 (49,51%)</td><td>Bali Post, 20 Jul 2026</td></tr>
+        <tr><td>Cakupan per 20 September 2026</td><td class="r tab">sekitar 60%</td><td>Bali Post, 21 Sep 2026</td></tr>
+        <tr><td>Target Pemerintah Provinsi Bali akhir 2026</td><td class="r tab">87%</td><td>Bali Post, 21 Sep 2026</td></tr>
+        <tr><td>Kabupaten Tabanan hingga September 2026</td><td class="r tab">56,02%; 12 desa zona merah</td><td>NusaBali, 4 Okt 2026</td></tr>
+      </tbody>
+    </table>
+    <p>Naik dari sekitar 60% ke 87% berarti kira-kira <strong class="tab">154 ribu</strong> anjing lagi sebelum akhir 2026 (dihitung dari estimasi populasi 570.976 ekor). Pemprov membentuk Satgas Pengendalian Rabies Provinsi Bali lewat Keputusan Gubernur 697/03-F/HK/2026 (16 Juli 2026).</p>
+
+    <h3>Dua hambatan di lapangan</h3>
+    <div class="two">
+      <div class="box">
+        <p class="box-title">A. Petugas tidak bisa memastikan anjing mana yang sudah divaksin</p>
+        <p>Anjing kampung berkeliaran bebas, sebagian tanpa pemilik. Kalung atau cat penanda bisa lepas dan pudar; microchip dipasang satu per satu dan dibaca dengan alat khusus. Akibatnya anjing yang sama bisa divaksin dua kali, anjing lain terlewat, dan cakupan per banjar sulit dihitung dari anjing yang benar-benar ditemui.</p>
+      </div>
+      <div class="box">
+        <p class="box-title">B. Korban gigitan tidak tahu langkah pertama</p>
+        <p>Ke-16 kematian tahun 2025 terjadi pada korban yang tidak dibawa ke faskes. Dalam keadaan panik, warga perlu tahu tiga hal saat itu juga: cuci luka dengan sabun dan air mengalir sekitar 15 menit, nomor darurat, dan bahwa mereka harus ke puskesmas atau rumah sakit hari itu juga.</p>
+      </div>
+    </div>
+
+    <h2><span class="num">2</span>Target User</h2>
+    <table class="data">
+      <thead><tr><th style="width:24%">Pengguna</th><th style="width:26%">Konteks</th><th style="width:22%">Pain point</th><th>Yang disediakan Tera</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Petugas vaksinator, Tim Siaga Rabies desa</strong> <span class="tag">primer</span></td><td>Keliling banjar, HP di satu tangan, terik, sinyal lemah</td><td>Tidak bisa mengecek status vaksin anjing tanpa penanda</td><td>Foto wajah anjing; dalam beberapa detik muncul kandidat anjing terdaftar dan status vaksinnya</td></tr>
+        <tr><td><strong>Warga korban gigitan</strong> <span class="tag">sekunder</span></td><td>Panik, tanpa akun, mungkin tanpa sinyal</td><td>Tidak tahu langkah pertama dan ke mana harus pergi</td><td>Panduan bernomor, tombol 119 dan 112 yang selalu terlihat, laporan opsional tanpa login</td></tr>
+        <tr><td><strong>Admin dinas / Satgas</strong> <span class="tag">sekunder</span></td><td>Memantau banyak banjar dari kantor</td><td>Data cakupan dan laporan gigitan tersebar</td><td>Cakupan per banjar, antrean kasus, daftar faskes, tinjauan calon duplikat</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">3</span>Proposed Solution</h2>
+    <p><strong>Tera</strong> adalah aplikasi web (PWA, mobile-first) dengan dua pintu di beranda: <em>"Saya digigit anjing"</em> dan <em>"Saya petugas"</em>. Nama <em>tera</em> (KBBI: cap atau tanda resmi) menggambarkan idenya: anjing yang divaksin punya tanda yang tidak bisa hilang, yaitu wajahnya sendiri, dan tanda itu bisa dicek ulang hanya dengan kamera HP.</p>
+  </div>
+  <footer class="pg">1</footer>
+</section>
+
+<!-- ============================== HALAMAN 2 ============================== -->
+<section class="page">
+  <header class="run">Tera · Proposal Tahap 1</header>
+  <div class="content">
+    <div class="two">
+      <div class="box">
+        <p class="box-title">Alur petugas (login)</p>
+        <ol class="steps">
+          <li>Pilih banjar aktif, lalu foto wajah anjing (1–3 foto).</li>
+          <li>Setiap foto langsung diperiksa kualitasnya, dengan pesan spesifik seperti "Terlalu gelap. Cari cahaya."</li>
+          <li>Sistem mencari anjing paling mirip di banjar itu. Hasil tampil dalam tiga zona: <strong>kuat</strong> (1 kandidat), <strong>ragu</strong> (5 kandidat berdampingan), <strong>tidak cocok</strong> (tawaran daftar baru).</li>
+          <li>Petugas mengonfirmasi "Ya, anjing ini" atau "Bukan", melihat status vaksin, lalu mencatat vaksin. Anjing baru didaftarkan; fotonya menjadi galeri.</li>
+        </ol>
+      </div>
+      <div class="box">
+        <p class="box-title">Alur warga (tanpa login, bisa offline)</p>
+        <ol class="steps">
+          <li>Buka "Saya digigit anjing". Setelah situs pernah dibuka, halaman ini tersimpan di perangkat dan tetap terbuka tanpa sinyal.</li>
+          <li>Ikuti panduan bernomor; tombol Telepon 119 dan 112 selalu terlihat.</li>
+          <li>Opsional: kirim laporan (waktu, bagian tubuh, lokasi dibulatkan, foto anjing dari jarak aman). Warga langsung mendapat kode kasus.</li>
+          <li>Laporan masuk antrean petugas secara real-time. AI menyarankan kandidat anjing penggigit; petugas yang memastikan.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Tanpa AI, fungsi utama Tera tidak ada.</strong> Mencari identitas anjing dari foto adalah inti Mode Petugas. Tanpa model re-identifikasi, aplikasi ini kembali menjadi formulir pencatatan yang tetap menuntut petugas mengenali anjing dengan ingatan.</p>
+    </div>
+    <div class="callout warn">
+      <p><strong>Batas keselamatan.</strong> Status vaksin anjing tidak pernah ditampilkan ke warga dan tidak dipakai untuk menyatakan korban aman. Keputusan medis, termasuk vaksin dan serum anti-rabies, tetap di tangan tenaga kesehatan. Hasil AI pada laporan warga diberi label "Saran AI, bukan kepastian". Teks pertolongan pertama belum ditinjau tenaga kesehatan, dan halaman menampilkan catatan itu.</p>
+    </div>
+
+    <h2><span class="num">4</span>AI Implementation</h2>
+    <p>AI di Tera adalah <strong>computer vision untuk re-identifikasi individu anjing</strong>, berjalan di layanan milik sendiri (FastAPI, CPU). Tidak ada LLM dan tidak ada API AI pihak ketiga.</p>
+    <figure>
+      <svg class="diagram" viewBox="0 0 700 186" role="img" aria-label="Pipeline AI Tera">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f4a41"/></marker>
+        </defs>
+        <g class="n"><rect x="2" y="4" width="150" height="58" rx="8"/><text x="77" y="26">Foto dari HP</text><text x="77" y="42" class="s">maks. 1024 px, JPEG,</text><text x="77" y="55" class="s">EXIF dihapus di perangkat</text></g>
+        <g class="n"><rect x="184" y="4" width="150" height="58" rx="8"/><text x="259" y="26">1. Quality gate</text><text x="259" y="42" class="s">OpenCV: blur, cahaya,</text><text x="259" y="55" class="s">resolusi</text></g>
+        <g class="n"><rect x="366" y="4" width="150" height="58" rx="8"/><text x="441" y="26">2. Deteksi</text><text x="441" y="42" class="s">OWL-ViT B/32: anjing</text><text x="441" y="55" class="s">dan wajah/kepala</text></g>
+        <g class="n a"><rect x="548" y="4" width="150" height="58" rx="8"/><text x="623" y="26">3. Embedding</text><text x="623" y="42" class="s">MiewID msv3:</text><text x="623" y="55" class="s">vektor 2152 dimensi</text></g>
+        <line x1="152" y1="33" x2="182" y2="33" class="l" marker-end="url(#ar)"/>
+        <line x1="334" y1="33" x2="364" y2="33" class="l" marker-end="url(#ar)"/>
+        <line x1="516" y1="33" x2="546" y2="33" class="l" marker-end="url(#ar)"/>
+        <line x1="623" y1="62" x2="623" y2="122" class="l" marker-end="url(#ar)"/>
+        <g class="n a"><rect x="548" y="124" width="150" height="58" rx="8"/><text x="623" y="146">4. Cari per banjar</text><text x="623" y="162" class="s">pgvector cosine, skor</text><text x="623" y="175" class="s">terbaik per anjing, top-5</text></g>
+        <g class="n"><rect x="366" y="124" width="150" height="58" rx="8"/><text x="441" y="146">5. Tiga zona</text><text x="441" y="162" class="s">kuat: skor 0,667 ke atas</text><text x="441" y="175" class="s">ragu: 0,39 ke atas</text></g>
+        <g class="n h"><rect x="184" y="124" width="150" height="58" rx="8"/><text x="259" y="146">6. Konfirmasi petugas</text><text x="259" y="162" class="s">"Ya, anjing ini" / "Bukan",</text><text x="259" y="175" class="s">lalu catat vaksin</text></g>
+        <line x1="548" y1="153" x2="518" y2="153" class="l" marker-end="url(#ar)"/>
+        <line x1="366" y1="153" x2="336" y2="153" class="l" marker-end="url(#ar)"/>
+        <g class="n r"><rect x="2" y="124" width="150" height="58" rx="8"/><text x="77" y="146">Ditolak dengan pesan</text><text x="77" y="162" class="s">mis. BLUR, TOO_DARK,</text><text x="77" y="175" class="s">NO_DOG</text></g>
+        <path d="M441 62 V93 H77 V122" class="l dash" marker-end="url(#ar)"/>
+        <line x1="259" y1="62" x2="259" y2="93" class="l dash"/>
+      </svg>
+      <figcaption><span class="fn">Gambar 1.</span> Pipeline AI. Tahap 1–3 di AI service (stateless, foto tidak disimpan); tahap 4–5 di Postgres (<code>match_dogs()</code>); tahap 6 oleh manusia. Garis putus: foto yang gagal diperiksa.</figcaption>
+    </figure>
+    <p><strong>Input dan output.</strong> Input: satu foto JPEG terkompres per panggilan (1–3 foto per scan). Output AI service: status kualitas, kotak deteksi, dan vektor 2152 dimensi. Postgres mengembalikan 5 kandidat teratas beserta skor kemiripan kosinus, lalu server menentukan zona. Ambang zona disimpan di database dan bisa diubah admin.</p>
+    <p><strong>Kenapa re-identifikasi, bukan klasifikasi atau LLM.</strong> Jumlah anjing terus bertambah dan tiap anjing hanya punya 1–3 foto. Klasifikasi (satu kelas per anjing) harus dilatih ulang setiap ada anjing baru. Model re-ID memetakan foto ke vektor, jadi anjing baru cukup didaftarkan dengan menyimpan vektornya. Model bahasa umum tidak dirancang membedakan individu anjing dan umumnya dipakai lewat API pihak ketiga.</p>
+  </div>
+  <footer class="pg">2</footer>
+</section>
+
+<!-- ============================== HALAMAN 3 ============================== -->
+<section class="page">
+  <header class="run">Tera · Proposal Tahap 1</header>
+  <div class="content">
+
+    <table class="data">
+      <thead><tr><th style="width:13%">Tahap</th><th style="width:29%">Model / metode</th><th style="width:19%">Lisensi</th><th>Alasan pemilihan (diukur)</th></tr></thead>
+      <tbody>
+        <tr><td>Kualitas</td><td>OpenCV: variance of Laplacian, kecerahan, resolusi</td><td>Apache-2.0</td><td>Ambang dikalibrasi dari 298 foto anjing nyata dan salinan rusak sintetisnya</td></tr>
+        <tr><td>Deteksi</td><td>OWL-ViT base-patch32 (Google)</td><td>Apache-2.0</td><td>Deteksi p50 571 ms vs 5152 ms (OWLv2 @960); rank-1 82,2% vs 73,8% pada 60 anjing yang sama</td></tr>
+        <tr><td>Embedding</td><td>MiewID msv3 (Conservation X Labs)</td><td><strong>Belum dinyatakan</strong>; izin belum diperoleh</td><td>Model re-ID multispesies; kartu modelnya menyebut DogFaceNet sebagai sumber data anjing. Dimuat ulang tanpa <code>trust_remote_code</code>; keluaran setara kode resmi (kosinus 1,000000 pada 14 foto)</td></tr>
+        <tr><td>Pencocokan</td><td>pgvector <code>halfvec(2152)</code>, <code>match_dogs()</code></td><td>PostgreSQL License</td><td>Data dan pencarian di satu tempat, ikut aturan akses (RLS); pencarian eksak per banjar</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Hasil evaluasi (dari <code>docs/EVALUATION.md</code>)</h3>
+    <p>Diukur dengan <code>scripts/eval.py</code> pada dataset publik DogFaceNet (CC BY 4.0), dibagi per individu anjing: sebagian terdaftar, sisanya tidak terdaftar (open-set). CPU laptop, tanpa GPU.</p>
+    <table class="data">
+      <thead><tr><th>Data uji</th><th class="r">Rank-1</th><th class="r">Rank-5</th><th class="r">TAR@FAR=1%</th><th class="r">Tak terdaftar di luar zona kuat</th></tr></thead>
+      <tbody>
+        <tr><td>Foto mentah, pipeline penuh (300 anjing, 1.516 foto)</td><td class="r tab">60,2%</td><td class="r tab">72,4%</td><td class="r tab">62,8%</td><td class="r tab">100,0%</td></tr>
+        <tr><td>Wajah ter-align, split uji resmi (139 anjing, 697 foto)</td><td class="r tab">98,7%</td><td class="r tab">100,0%</td><td class="r tab">99,1%</td><td class="r tab">99,5%</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Latensi analisis per foto (CPU laptop, 1.516 foto): p50 899 ms, p95 954 ms; target p50 maksimal 3 detik terpenuhi. Latensi di hosting gratis belum diukur.</p>
+    <p><strong>Membaca angka ini.</strong> Pada ambang yang direkomendasikan untuk foto mentah (kuat 0,667, ragu 0,39), hanya 14,4% foto anjing terdaftar yang masuk zona kuat, tetapi <strong>semuanya benar (0,0% salah)</strong>. Sisanya masuk zona ragu atau tidak cocok dan diperiksa petugas. Karena itu Tera tidak memutuskan sendiri: zona kuat mempercepat kasus yang jelas, zona ragu menyodorkan 5 kandidat, dan manusia yang memutuskan.</p>
+    <p><strong>Bukti dari lapangan lain.</strong> Pada kampanye vaksinasi rabies di Tanzania, algoritma pengenalan wajah anjing mencocokkan dengan benar 249 (99,2%) anjing tervaksin pada data tersaring dan 80,8% pada data tanpa penyaringan. Sensitivitas aplikasi di lapangan 76,2% (spesifisitas 98,9%), turun karena foto buruk, distorsi warna akibat cahaya, dan operator yang keliru menolak kecocokan (Czupryna dkk., <em>Scientific Reports</em> 2023). Inilah alasan Tera memeriksa kualitas setiap foto sebelum pencocokan.</p>
+
+    <h3>Keterbatasan yang diketahui</h3>
+    <ul class="tight">
+      <li><strong>Detektor:</strong> OWL-ViT B/32 hampir selalu memberi kotak seluruh anjing, bukan hanya wajah. Inilah penyebab utama selisih 60,2% (foto mentah) vs 98,7% (wajah ter-align); detektor wajah anjing khusus adalah perbaikan dengan dampak terbesar.</li>
+      <li><strong>Data:</strong> belum dievaluasi pada anjing kampung Bali. DogFaceNet mungkin tumpang tindih dengan data latih MiewID, jadi angka di atas bisa terlalu optimistis. Ambang masih ditandai "sementara".</li>
+      <li><strong>Lisensi:</strong> bobot dan kode MiewID tidak mencantumkan lisensi. Izin tertulis perlu diperoleh dari pembuatnya; bila ditolak, embedder diganti model berlisensi jelas (terpisah di <code>ai-service/app/embedder.py</code>).</li>
+    </ul>
+  </div>
+  <footer class="pg">3</footer>
+</section>
+
+<!-- ============================== HALAMAN 4 ============================== -->
+<section class="page">
+  <header class="run">Tera · Proposal Tahap 1</header>
+  <div class="content">
+    <h2><span class="num">5</span>MVP &amp; Key Features</h2>
+    <table class="data compact">
+      <thead><tr><th style="width:11%">Jenis</th><th>Fitur yang sudah berjalan</th><th style="width:30%">Bukti</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag core">Inti</span></td><td>Scan 1–3 foto, pesan kualitas per foto, hasil tiga zona</td><td><code>/petugas/scan</code>; e2e officer</td></tr>
+        <tr><td><span class="tag core">Inti</span></td><td>Daftar anjing baru, catat vaksin, riwayat vaksin, tambah foto</td><td><code>/petugas/anjing/[id]</code></td></tr>
+        <tr><td><span class="tag core">Inti</span></td><td>Mode Warga: panduan, tombol 119/112, offline, laporan + kode kasus</td><td><code>/darurat</code>; e2e citizen</td></tr>
+        <tr><td><span class="tag core">Inti</span></td><td>AI gagal: "Catat tanpa verifikasi AI", lalu rematch dan tanda calon duplikat</td><td>e2e fallback</td></tr>
+        <tr><td><span class="tag">Tambahan</span></td><td>Antrean laporan real-time; kandidat AI wajib dikonfirmasi petugas</td><td><code>/petugas/kasus</code></td></tr>
+        <tr><td><span class="tag">Tambahan</span></td><td>Dasbor admin: cakupan per banjar, faskes, ambang, calon duplikat</td><td><code>/admin</code></td></tr>
+        <tr><td><span class="tag">Tambahan</span></td><td>Mode demo untuk juri tanpa login, banjar DEMO terpisah, tombol reset</td><td><code>/demo</code>; e2e demo</td></tr>
+      </tbody>
+    </table>
+
+    <div class="shots">
+      <figure><img src="../screenshots/02-darurat-360.png" alt="Mode Warga" class="crop"><figcaption><span class="fn">Gambar 2.</span> Mode Warga: panduan dan tombol 119/112.</figcaption></figure>
+      <figure><img src="img/demo-dikenali.png" alt="Hasil zona kuat" class="crop"><figcaption><span class="fn">Gambar 3.</span> Model asli: dikenali benar, zona kuat, skor 0,73.</figcaption></figure>
+      <figure><img src="img/demo-tidak-cocok.png" alt="Hasil zona tidak cocok" class="fit"><figcaption><span class="fn">Gambar 4.</span> Model asli: anjing tak terdaftar, zona tidak cocok.</figcaption></figure>
+      <figure><img src="../screenshots/16-scan-ai-mati-360.png" alt="AI tidak tersedia" class="crop" style="object-position: 50% 45%"><figcaption><span class="fn">Gambar 5.</span> AI tidak tersedia: tetap bisa mencatat.</figcaption></figure>
+    </div>
+    <p class="note">Gambar 3–4: <code>/demo</code> dengan AI service asli (<code>scripts/capture-proposal-screens.mjs</code>); foto DogFaceNet (CC BY 4.0) dan Wikimedia Commons (domain publik). Gambar 2 dan 5: screenshot e2e.</p>
+    <p><strong>Pengujian</strong> (dijalankan di repo): Vitest 44, test database 11, Playwright end-to-end 8 alur, pytest 38 + 21. <strong>Cara juri menguji:</strong> di <code>/demo</code>, unggah dua foto berbeda dari anjing yang sama (A didaftarkan, B dicocokkan).</p>
+
+    <h2><span class="num">6</span>Technical Architecture</h2>
+    <figure>
+      <svg class="diagram" viewBox="0 0 700 142" role="img" aria-label="Arsitektur Tera">
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4f4a41"/></marker>
+        </defs>
+        <g class="n"><rect x="2" y="4" width="104" height="62" rx="8"/><text x="54" y="26">User</text><text x="54" y="42" class="s">petugas, warga,</text><text x="54" y="55" class="s">admin</text></g>
+        <g class="n"><rect x="134" y="4" width="128" height="62" rx="8"/><text x="198" y="26">Frontend</text><text x="198" y="42" class="s">Next.js PWA; kompres</text><text x="198" y="55" class="s">foto, hapus EXIF</text></g>
+        <g class="n"><rect x="290" y="4" width="128" height="62" rx="8"/><text x="354" y="26">Backend</text><text x="354" y="42" class="s">Route Handlers (TS,</text><text x="354" y="55" class="s">zod, rate limit)</text></g>
+        <g class="n"><rect x="446" y="4" width="128" height="62" rx="8"/><text x="510" y="26">Database</text><text x="510" y="42" class="s">Supabase Postgres +</text><text x="510" y="55" class="s">pgvector, RLS, Storage</text></g>
+        <g class="n a"><rect x="290" y="88" width="128" height="50" rx="8"/><text x="354" y="108">AI service</text><text x="354" y="124" class="s">FastAPI, CPU, stateless</text></g>
+        <g class="n h"><rect x="602" y="4" width="96" height="62" rx="8"/><text x="650" y="26">Result</text><text x="650" y="42" class="s">zona +</text><text x="650" y="55" class="s">kandidat</text></g>
+        <line x1="106" y1="35" x2="132" y2="35" class="l" marker-end="url(#ar2)"/>
+        <line x1="262" y1="35" x2="288" y2="35" class="l" marker-end="url(#ar2)"/>
+        <line x1="418" y1="35" x2="444" y2="35" class="l" marker-end="url(#ar2)"/>
+        <line x1="574" y1="35" x2="600" y2="35" class="l" marker-end="url(#ar2)"/>
+        <line x1="340" y1="66" x2="340" y2="86" class="l" marker-end="url(#ar2)"/>
+        <line x1="368" y1="86" x2="368" y2="68" class="l" marker-end="url(#ar2)"/>
+        <text x="428" y="110" class="s left">foto ke AI; kembali: kualitas, deteksi, vektor</text>
+        <text x="428" y="124" class="s left">(header X-Service-Key, timeout 15 detik)</text>
+      </svg>
+      <figcaption><span class="fn">Gambar 6.</span> Arsitektur sistem. Kandidat dicari oleh <code>match_dogs()</code> di Postgres.</figcaption>
+    </figure>
+    <table class="data compact">
+      <tbody>
+        <tr><th style="width:17%">Web</th><td>Next.js 16 + React 19, Tailwind CSS 4, PWA; Route Handlers TypeScript + zod</td></tr>
+        <tr><th>Data</th><td>Supabase: Postgres + pgvector, Auth, Storage privat (signed URL), Realtime, Row Level Security</td></tr>
+        <tr><th>AI</th><td>Python FastAPI, PyTorch CPU, OWL-ViT, MiewID, OpenCV</td></tr>
+        <tr><th>Hosting</th><td>Rencana: Vercel, Supabase cloud, Hugging Face Spaces CPU. Semua tier gratis, tanpa biaya API.</td></tr>
+        <tr><th>Saat AI gagal</th><td>Timeout 15 detik, lalu "Catat tanpa verifikasi AI", lalu job rematch. Laporan warga tidak menunggu AI: kode kasus dikirim dulu, analisis foto menyusul.</td></tr>
+        <tr><th>Privasi</th><td>EXIF dihapus di perangkat; lokasi dibulatkan ±110 m; foto di bucket privat; data pemilik dan nomor HP opsional dengan persetujuan; foto tidak dikirim ke API AI pihak ketiga.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <footer class="pg">4</footer>
+</section>
+
+<!-- ============================== HALAMAN 5 ============================== -->
+<section class="page">
+  <header class="run">Tera · Proposal Tahap 1</header>
+  <div class="content">
+    <h2><span class="num">7</span>Innovation &amp; Differentiation</h2>
+    <table class="data compact">
+      <thead><tr><th style="width:27%">Cara yang ada</th><th style="width:37%">Celah</th><th>Yang dilakukan Tera</th></tr></thead>
+      <tbody>
+        <tr><td>Kalung, tag, cat penanda</td><td>Lepas, pudar, sulit dipasang pada anjing liar</td><td>Penanda adalah wajah anjing itu sendiri</td></tr>
+        <tr><td>Microchip</td><td>Dipasang satu per satu; butuh alat pembaca</td><td>Cukup kamera HP petugas</td></tr>
+        <tr><td>Pencatatan digital tanpa biometrik (contoh: DITA PULANG, Gianyar)</td><td>Data tersimpan, tetapi anjing di lapangan tetap dikenali manual</td><td>Foto langsung dicocokkan ke catatan vaksin di banjar itu</td></tr>
+        <tr><td>Riset pengenalan wajah anjing (Tanzania, 2023)</td><td>Dipakai menilai cakupan setelah kampanye</td><td>Dipakai saat vaksinasi, digabung dengan alur warga tergigit</td></tr>
+      </tbody>
+    </table>
+    <p>Pembeda lain yang bisa diperiksa di kode: tiga zona dengan konfirmasi manusia, pesan kualitas foto, fallback saat AI mati, dan pencocokan per banjar.</p>
+
+    <h2><span class="num">8</span>Impact &amp; Development Potential</h2>
+    <p><strong>Manfaat:</strong> mengurangi vaksinasi ganda dan anjing terlewat, cakupan per banjar dihitung dari anjing yang benar-benar ditemui, dan warga tergigit langsung mendapat langkah pertama. <strong>Jalur adopsi (rencana, belum ada kemitraan):</strong> uji coba di satu banjar bersama Tim Siaga Rabies desa dan Puskeswan, lalu presentasi ke Distan Pangan Bali dan Satgas Pengendalian Rabies; puskesmas menerima antrean laporan. <strong>Skalabilitas:</strong> pencocokan per banjar (ratusan foto, pencarian eksak), AI service stateless bisa ditambah instance, indeks HNSW tersedia untuk pencarian lintas banjar.</p>
+    <table class="data compact">
+      <thead><tr><th style="width:31%">Risiko</th><th>Mitigasi</th></tr></thead>
+      <tbody>
+        <tr><td>Lisensi MiewID belum dinyatakan</td><td>Minta izin tertulis ke Conservation X Labs / Wild Me; embedder bisa diganti</td></tr>
+        <tr><td>Akurasi pada foto lapangan</td><td>Quality gate, tiga zona, konfirmasi petugas; evaluasi ulang dengan foto anjing Bali</td></tr>
+        <tr><td>Hosting gratis lambat saat bangun</td><td>Timeout 15 detik, "Catat tanpa verifikasi AI", rematch saat AI pulih</td></tr>
+        <tr><td>Panduan medis belum ditinjau</td><td>Ditandai di halaman; ditinjau tenaga kesehatan sebelum dipakai publik</td></tr>
+        <tr><td>Data pribadi</td><td>Opsional + persetujuan, bucket privat, lokasi dibulatkan; retensi menunggu dinas</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Rencana menuju final:</strong> (1) detektor wajah anjing khusus; (2) foto anjing Bali dengan izin untuk evaluasi, kalibrasi ambang, dan fine-tuning bila lisensi model mengizinkan; (3) mode offline petugas; (4) peta gigitan × cakupan tingkat banjar; (5) ekspor CSV dan kebijakan retensi data.</p>
+
+    <h2><span class="num">9</span>Technology Disclosure</h2>
+    <p>Stack di bagian 6; model OWL-ViT (Apache-2.0) dan MiewID msv3 (lisensi belum dinyatakan); data evaluasi DogFaceNet (CC BY 4.0). Template awal <code>create-next-app</code>. Konsep Mode Warga berasal dari karya tim sebelumnya, Vishara (FIT Competition 2026); inti AI re-identifikasi dikembangkan baru untuk lomba ini. Kode, test, dokumentasi, dan draf proposal ini disusun dengan bantuan AI coding assistant Claude Code (Anthropic). Rincian di <strong>Lampiran A</strong>.</p>
+
+    <h2><span class="num">10</span>Submission Links</h2>
+    <table class="data compact">
+      <tbody>
+        <tr><th style="width:22%">GitHub</th><td><mark class="isi">[ISI: URL repository GitHub]</mark></td></tr>
+        <tr><th>Website</th><td><mark class="isi">[ISI: URL website live]</mark> · mode demo tanpa login: <code>/demo</code></td></tr>
+        <tr><th>Akun demo</th><td>Akun petugas/admin khusus juri dikirim lewat kanal panitia, tidak dicantumkan di sini</td></tr>
+        <tr><th>Versi dinilai</th><td>tag <code>v1.0-submission</code> · commit <mark class="isi">[ISI: commit hash]</mark></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <footer class="pg">5</footer>
+</section>
+
+<!-- ============================== LAMPIRAN A ============================== -->
+<section class="page appendix">
+  <header class="run">Tera · Proposal Tahap 1 · Lampiran</header>
+  <div class="content">
+    <h2>Lampiran A. AI &amp; Technology Disclosure</h2>
+    <table class="data disclosure">
+      <thead><tr><th style="width:24%">Komponen</th><th>Isi</th></tr></thead>
+      <tbody>
+        <tr><th>Nama Produk</th><td>Tera</td></tr>
+        <tr><th>Framework / Frontend</th><td>Next.js 16.4 (MIT), React 19 (MIT), Tailwind CSS 4 (MIT); PWA dengan service worker</td></tr>
+        <tr><th>Backend / Runtime</th><td>Next.js Route Handlers di Node.js 22 (TypeScript); AI service Python 3.11 dengan FastAPI (MIT) dan Uvicorn (BSD-3-Clause)</td></tr>
+        <tr><th>Database / Storage</th><td>Supabase: PostgreSQL + pgvector (PostgreSQL License), Auth, Storage privat, Realtime</td></tr>
+        <tr><th>Hosting / Deployment</th><td>Rencana: Vercel (web), Supabase cloud (database), Hugging Face Spaces CPU (AI service). Semua tier gratis.</td></tr>
+        <tr><th>AI Model / API / Method</th><td>(1) Quality gate OpenCV (Apache-2.0); (2) deteksi OWL-ViT base-patch32, <code>google/owlvit-base-patch32</code> (Apache-2.0); (3) embedding re-identifikasi MiewID msv3, <code>conservationxlabs/miewid-msv3</code> (<strong>lisensi tidak dinyatakan pembuat; izin tertulis belum diperoleh</strong>), dimuat dengan timm (Apache-2.0); (4) pencocokan cosine similarity pgvector di fungsi SQL <code>match_dogs()</code>. Semua inferensi di AI service milik sendiri. Tidak ada LLM dan tidak ada API AI pihak ketiga.</td></tr>
+        <tr><th>Peran AI dalam Produk</th><td>Mengenali individu anjing dari foto: memeriksa kualitas foto, mendeteksi anjing dan wajahnya, membuat vektor identitas, lalu mencari anjing terdaftar yang paling mirip di banjar yang sama. Hasil ditampilkan dalam tiga zona; keputusan akhir selalu dikonfirmasi petugas. Pada laporan warga, AI hanya memberi saran kandidat anjing untuk petugas.</td></tr>
+        <tr><th>Dataset / Data Source</th><td>DogFaceNet (Mougeot, Li, Jia, PRICAI 2019; CC BY 4.0; zenodo.org/records/12578449) untuk evaluasi dan data demo; foto Wikimedia Commons (CC0/domain publik) untuk kalibrasi dan test; gambar sintetis untuk e2e. Tidak ada data pribadi yang dipakai untuk pelatihan. Statistik rabies dari media yang dikutip di Lampiran B.</td></tr>
+        <tr><th>Open-source Libraries</th><td>@supabase/ssr, @supabase/supabase-js, zod (MIT), lucide-react (ISC); PyTorch, torchvision (BSD-3-Clause), transformers, timm, safetensors, huggingface-hub (Apache-2.0), opencv-python-headless (Apache-2.0), Pillow (MIT-CMU), NumPy (BSD-3-Clause), python-multipart (Apache-2.0), tokenizers (Apache-2.0), Starlette (BSD-3-Clause); untuk pengujian: Vitest (MIT), Playwright (Apache-2.0), pytest (MIT)</td></tr>
+        <tr><th>Template / Boilerplate</th><td><code>create-next-app</code> (commit awal repo "Initial commit from Create Next App")</td></tr>
+        <tr><th>AI Coding Assistant</th><td>Claude Code (Anthropic) dipakai untuk menulis kode, migrasi database, test, dokumentasi, dan draf proposal ini. Tim meninjau, menjalankan, dan bertanggung jawab atas hasilnya; keputusan desain dicatat di <code>docs/DECISIONS.md</code>.</td></tr>
+        <tr><th>Pre-existing Components</th><td>Konsep Mode Warga (panduan pertolongan pertama darurat, tombol telepon darurat, ringkasan kasus untuk petugas) dikembangkan dari karya tim sebelumnya, Vishara (FIT Competition 2026); implementasinya ditulis baru. Inti AI re-identifikasi, Mode Petugas, dasbor admin, dan mode demo dikembangkan baru untuk lomba ini.</td></tr>
+        <tr><th>Third-party Assets / Credits</th><td>Font Plus Jakarta Sans (SIL OFL 1.1); ikon lucide-react (ISC); foto DogFaceNet (CC BY 4.0) di mode demo; foto Wikimedia Commons (domain publik): <em>Kintamani dog white</em> dan <em>Street dog-Gianyar Bali-2009</em> (Imk0278; Jack Merridew). Logo Tera dibuat untuk proyek ini.</td></tr>
+        <tr><th>Layanan pihak ketiga</th><td>Supabase (data operasional), Vercel (lalu lintas web), Hugging Face Spaces (menjalankan AI service milik sendiri; foto diproses di memori dan tidak disimpan), Hugging Face Hub (mengunduh bobot model saat build; tanpa data pengguna).</td></tr>
+      </tbody>
+    </table>
+    <p class="statement"><strong>Pernyataan:</strong> Kami menyatakan bahwa informasi di atas benar dan lengkap. Kami bertanggung jawab atas penggunaan teknologi, source code, data, library, API, model AI, dan aset yang digunakan pada produk.</p>
+  </div>
+  <footer class="pg">Lampiran A</footer>
+</section>
+
+<!-- ============================== LAMPIRAN B ============================== -->
+<section class="page appendix">
+  <header class="run">Tera · Proposal Tahap 1 · Lampiran</header>
+  <div class="content">
+    <h2>Lampiran B. Referensi</h2>
+    <ol class="refs">
+      <li>ANTARA Bali, 9 Jan 2026. Dinkes Bali sebut 16 korban rabies tewas karena tak dibawa ke faskes pada 2025. https://bali.antaranews.com/berita/395621/dinkes-bali-sebut-16-korban-rabies-tewas-karena-tak-dibawa-ke-faskes-pada-2025</li>
+      <li>Bali Post, 20 Jul 2026. Pembentukan Satgas Pengendalian Rabies Provinsi Bali; data Distan Pangan Bali hingga 17 Juli 2026. https://www.balipost.com/news/2026/07/20/567741/Wujudkan-Bebas-Rabies,Bali-Bentuk...html</li>
+      <li>ANTARA Bali, 5 Sep 2026. Hingga Juli 2026, vaksinasi rabies di Bali telah mencapai 49,51 persen. https://bali.antaranews.com/foto/412879/hingga-juli-2026-vaksinasi-rabies-di-bali-telah-mencapai-4951-persen</li>
+      <li>Bali Post, 21 Sep 2026. Cakupan vaksinasi rabies sekitar 60 persen per 20 September; target 87 persen akhir 2026. https://www.balipost.com/news/2026/09/21/582941/Vaksinasi-Rabies-di-Bali-Capai...html</li>
+      <li>NusaBali, 4 Okt 2026. 12 desa di Tabanan zona merah rabies, vaksinasi anjing baru 56 persen. https://www.nusabali.com/berita/232683/12-desa-di-tabanan-zona-merah-rabies-vaksinasi-anjing-baru-56-persen</li>
+      <li>Czupryna, A. M. dkk. (2023). Testing novel facial recognition technology to identify dogs during vaccination campaigns. <em>Scientific Reports</em>. https://pmc.ncbi.nlm.nih.gov/articles/PMC10716125/</li>
+      <li>Conservation X Labs. MiewID msv3 (kartu model). https://huggingface.co/conservationxlabs/miewid-msv3</li>
+      <li>Google. OWL-ViT base-patch32 (kartu model). https://huggingface.co/google/owlvit-base-patch32</li>
+      <li>Mougeot, G., Li, D., Jia, S. (2019). A Deep Learning Approach for Dog Face Verification and Recognition. PRICAI 2019. Dataset DogFaceNet: https://zenodo.org/records/12578449</li>
+      <li>Berita Bali, 2022. Gianyar luncurkan DITA PULANG, inovasi digital cegah rabies. https://www.beritabali.com/berita/202207046851/gianyar-luncurkan-dita-pulang-inovasi-digital-cegah-rabies</li>
+      <li>Dokumentasi teknis repo: <code>README.md</code>, <code>docs/AI.md</code>, <code>docs/EVALUATION.md</code>, <code>docs/ARCHITECTURE.md</code>, <code>docs/PRIVACY.md</code>, <code>docs/DECISIONS.md</code>, <code>AI_DISCLOSURE.md</code>.</li>
+    </ol>
+  </div>
+  <footer class="pg">Lampiran B</footer>
+</section>
+
+</body>
+</html>
