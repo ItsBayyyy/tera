@@ -38,3 +38,64 @@ export async function login(page: Page, who: "petugas" | "admin" = "petugas") {
 export async function chooseBanjar(page: Page) {
   await page.getByLabel("Banjar aktif").selectOption({ label: `${E2E_BANJAR} · Ubud (contoh)` });
 }
+
+/**
+ * Headless Chromium ships no Indonesian voice, so tests swap in a fake speech engine that records
+ * what would be said and plays each utterance for `utteranceMs`. Utterance number `holdAt` (0-based)
+ * never finishes, which freezes the UI mid-reading for screenshots.
+ */
+export async function installFakeSpeech(page: Page, voiceLangs: string[], utteranceMs = 300, holdAt = -1) {
+  await page.addInitScript(({ langs, ms, hold }: { langs: string[]; ms: number; hold: number }) => {
+    type FakeUtterance = { text: string; onstart: (() => void) | null; onend: (() => void) | null };
+    const spoken: string[] = [];
+    let queue: FakeUtterance[] = [];
+    let playing = false;
+    let started = 0;
+    const playNext = () => {
+      const next = queue.shift();
+      playing = Boolean(next);
+      if (!next) return;
+      next.onstart?.();
+      if (started++ === hold) return;
+      setTimeout(() => {
+        next.onend?.();
+        playNext();
+      }, ms);
+    };
+    class Utterance {
+      text: string;
+      voice: unknown = null;
+      lang = "";
+      rate = 1;
+      onstart: (() => void) | null = null;
+      onend: (() => void) | null = null;
+      onerror: (() => void) | null = null;
+      constructor(text: string) {
+        this.text = text;
+      }
+    }
+    Object.defineProperty(window, "__spoken", { value: spoken });
+    Object.defineProperty(window, "SpeechSynthesisUtterance", { value: Utterance, configurable: true });
+    Object.defineProperty(window, "speechSynthesis", {
+      configurable: true,
+      value: {
+        getVoices: () => langs.map((lang) => ({ lang, name: `Uji ${lang}`, default: false, localService: true, voiceURI: lang })),
+        speak: (utterance: FakeUtterance) => {
+          spoken.push(utterance.text);
+          queue.push(utterance);
+          if (!playing) playNext();
+        },
+        cancel: () => {
+          queue = [];
+          playing = false;
+        },
+        addEventListener: () => {},
+        removeEventListener: () => {},
+      },
+    });
+  }, { langs: voiceLangs, ms: utteranceMs, hold: holdAt });
+}
+
+export function spokenTexts(page: Page): Promise<string[]> {
+  return page.evaluate(() => (window as unknown as { __spoken: string[] }).__spoken.slice());
+}

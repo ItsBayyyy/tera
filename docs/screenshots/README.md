@@ -9,7 +9,7 @@ SCREENSHOTS=1 PLAYWRIGHT_BROWSERS_PATH=0 npx playwright test e2e/screenshots.spe
 | # | Layar |
 |---|---|
 | 01 | Beranda (dua tombol) |
-| 02–05 | Mode Warga: panduan, form, error validasi, laporan diterima |
+| 02–05 | Mode Warga: panduan, form, error validasi, laporan diterima; 02b = langkah sedang dibacakan (suara uji, karena browser uji tidak punya suara bahasa Indonesia) |
 | 06 | Login dengan error per field |
 | 07–16 | Petugas: beranda kosong, scan, foto lolos, zona tidak cocok, error form, catat vaksin, selesai, zona kuat, zona ragu, AI mati |
 | 17–18 | Daftar anjing, detail anjing |

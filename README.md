@@ -34,7 +34,7 @@ Sepanjang 2025, **66.760 orang** di Bali tergigit hewan penular rabies dan **16 
 
 | Fitur | Halaman |
 |---|---|
-| Panduan pertolongan pertama bernomor dengan kalimat penenang, **timer cuci luka 15 menit** (layar tetap menyala), tombol **peta puskesmas & rumah sakit terdekat**, tombol telepon **119** dan **112** yang selalu terlihat, bisa dibuka offline (service worker) | `/darurat` |
+| Panduan pertolongan pertama bernomor dengan kalimat penenang, tombol **Bacakan langkah** (suara bahasa Indonesia bawaan HP, kartu aktif disorot), **timer cuci luka 15 menit** (layar tetap menyala, pengingat suara), tombol **peta puskesmas & rumah sakit terdekat**, tombol telepon **119** dan **112** yang selalu terlihat, bisa dibuka offline (service worker) | `/darurat` |
 | Laporan gigitan opsional (waktu, bagian tubuh, lokasi dibulatkan, foto anjing dari jarak aman, HP + persetujuan) → kode kasus pendek; tetap jalan saat AI mati | `/darurat` |
 | Login petugas (Supabase Auth), pilih banjar aktif | `/masuk`, `/petugas` |
 | Scan 1–3 foto, umpan balik kualitas per foto ("Terlalu gelap, cari cahaya"), hasil tiga zona: **kuat** (1 kandidat besar), **ragu** (5 kandidat berdampingan), **tidak cocok** (daftar baru + 3 terdekat) | `/petugas/scan` |

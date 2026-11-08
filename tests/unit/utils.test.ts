@@ -7,6 +7,7 @@ import { createRateLimiter } from "@/lib/rate-limit";
 import { fitWithin } from "@/lib/image/resize";
 import { qualityMessage } from "@/lib/ai/messages";
 import { hasAuthCookie } from "@/lib/auth-cookie";
+import { findIndonesianVoice, toSpeech } from "@/lib/speech";
 
 describe("vaccineState", () => {
   const now = new Date("2026-11-08T00:00:00Z");
@@ -121,5 +122,25 @@ describe("formatCountdown", () => {
     expect(formatCountdown(999)).toBe("00:01");
     expect(formatCountdown(0)).toBe("00:00");
     expect(formatCountdown(-5_000)).toBe("00:00");
+  });
+});
+
+describe("findIndonesianVoice", () => {
+  it("prefers id-ID, also accepts other Indonesian tags", () => {
+    expect(findIndonesianVoice([{ lang: "en-US" }, { lang: "id_ID" }])?.lang).toBe("id_ID");
+    expect(findIndonesianVoice([{ lang: "id" }, { lang: "id-ID" }])?.lang).toBe("id-ID");
+    expect(findIndonesianVoice([{ lang: "en-GB" }, { lang: "id" }])?.lang).toBe("id");
+  });
+
+  it("is null when the device has no Indonesian voice", () => {
+    expect(findIndonesianVoice([{ lang: "en-US" }, { lang: "ms-MY" }])).toBeNull();
+    expect(findIndonesianVoice([])).toBeNull();
+  });
+});
+
+describe("toSpeech", () => {
+  it("drops bracketed abbreviations that read badly aloud", () => {
+    expect(toSpeech("kebutuhan vaksin anti-rabies (VAR).")).toBe("kebutuhan vaksin anti-rabies.");
+    expect(toSpeech("Cuci luka  dengan sabun")).toBe("Cuci luka dengan sabun");
   });
 });

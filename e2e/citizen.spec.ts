@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { fixture, login, setAiMode } from "./helpers";
+import { fixture, installFakeSpeech, login, setAiMode, spokenTexts } from "./helpers";
 
 async function fileReport(page: Page) {
   await page.goto("/darurat");
@@ -83,5 +83,48 @@ test.describe("citizen emergency flow", () => {
     await page.clock.fastForward("10:01");
     await expect(page.getByRole("status").filter({ hasText: "15 menit selesai" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Ulangi timer" })).toBeVisible();
+  });
+
+  test("reads the steps aloud with the phone's Indonesian voice", async ({ page }) => {
+    await installFakeSpeech(page, ["en-US", "id-ID"]);
+    await page.goto("/darurat");
+
+    await page.getByRole("button", { name: "Bacakan langkah" }).click();
+    const stop = page.getByRole("button", { name: "Berhenti membacakan" });
+    await expect(stop).toBeVisible();
+    // The step being read is highlighted, so the reader can glance back at it.
+    await expect(page.locator('li[aria-current="step"]')).toContainText("Cuci luka dengan sabun");
+
+    const spoken = await spokenTexts(page);
+    expect(spoken[0]).toBe("Rabies bisa dicegah bila ditangani cepat. Ikuti langkah di bawah, satu per satu.");
+    expect(spoken[1]).toBe("Langkah 1. Cuci luka dengan sabun dan air mengalir. Lakukan sekitar 15 menit. Ini langkah paling penting.");
+    expect(spoken).toHaveLength(6);
+    expect(spoken.join(" ")).not.toContain("(VAR)");
+
+    await stop.click();
+    await expect(page.getByRole("button", { name: "Bacakan langkah" })).toBeVisible();
+    await expect(page.locator('li[aria-current="step"]')).toHaveCount(0);
+  });
+
+  test("the wash timer speaks its start, 5-minute reminder and end", async ({ page }) => {
+    await installFakeSpeech(page, ["id-ID"]);
+    await page.clock.install();
+    await page.goto("/darurat");
+    await page.getByRole("button", { name: "Mulai timer 15 menit" }).click();
+    await page.clock.fastForward("10:01");
+    await page.clock.fastForward("05:00");
+    await expect(page.getByRole("button", { name: "Ulangi timer" })).toBeVisible();
+    expect(await spokenTexts(page)).toEqual([
+      "Timer 15 menit dimulai. Terus alirkan air dan sabun ke luka.",
+      "5 menit lagi. Terus cuci lukanya.",
+      "15 menit selesai. Lanjut ke langkah 2: beri antiseptik.",
+    ]);
+  });
+
+  test("hides the read-aloud button when the phone has no Indonesian voice", async ({ page }) => {
+    await installFakeSpeech(page, ["en-US"]);
+    await page.goto("/darurat");
+    await expect(page.getByText("Cuci luka dengan sabun dan air mengalir")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Bacakan langkah" })).toHaveCount(0);
   });
 });

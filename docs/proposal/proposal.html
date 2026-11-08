@@ -104,7 +104,7 @@
         <div class="flow-head">Alur warga <small>tanpa login · bisa offline</small></div>
         <ol>
           <li>Buka "Saya digigit anjing". Setelah situs pernah dibuka, halaman ini tersimpan di perangkat dan tetap terbuka tanpa sinyal.</li>
-          <li>Ikuti panduan bernomor: timer cuci luka 15 menit dan tombol peta puskesmas terdekat; tombol Telepon 119 dan 112 selalu terlihat.</li>
+          <li>Ikuti panduan bernomor, bisa dibacakan dengan suara HP: timer cuci luka 15 menit dan tombol peta puskesmas terdekat; tombol Telepon 119 dan 112 selalu terlihat.</li>
           <li>Opsional: kirim laporan (waktu, bagian tubuh, lokasi dibulatkan, foto anjing dari jarak aman). Warga langsung mendapat kode kasus.</li>
           <li>Laporan masuk antrean petugas secara real-time. AI menyarankan kandidat anjing penggigit; petugas yang memastikan.</li>
         </ol>
@@ -207,12 +207,12 @@
     </table>
 
     <div class="shots">
-      <figure><span class="shot-tag warga">Warga</span><img src="../screenshots/02-darurat-360.png" alt="Mode Warga" class="crop"><figcaption><span class="fn">Gambar 2.</span> Mode Warga: panduan dan timer cuci luka.</figcaption></figure>
+      <figure><span class="shot-tag warga">Warga</span><img src="../screenshots/02b-darurat-dibacakan-360.png" alt="Mode Warga, langkah sedang dibacakan" class="crop" style="object-position: 50% 9%"><figcaption><span class="fn">Gambar 2.</span> Mode Warga: langkah dibacakan suara.</figcaption></figure>
       <figure><span class="shot-tag">AI asli · kuat</span><img src="img/demo-dikenali.png" alt="Hasil zona kuat" class="crop"><figcaption><span class="fn">Gambar 3.</span> Model asli: dikenali benar, zona kuat, skor 0,73.</figcaption></figure>
       <figure><span class="shot-tag">AI asli · tidak cocok</span><img src="img/demo-tidak-cocok.png" alt="Hasil zona tidak cocok" class="fit"><figcaption><span class="fn">Gambar 4.</span> Model asli: anjing tak terdaftar, zona tidak cocok.</figcaption></figure>
       <figure><span class="shot-tag">Petugas · AI mati</span><img src="../screenshots/16-scan-ai-mati-360.png" alt="AI tidak tersedia" class="crop" style="object-position: 50% 45%"><figcaption><span class="fn">Gambar 5.</span> AI tidak tersedia: tetap bisa mencatat.</figcaption></figure>
     </div>
-    <p class="note">Gambar 3–4: <code>/demo</code> dengan AI service asli; foto DogFaceNet (CC BY 4.0) dan Wikimedia Commons (domain publik). Gambar 2 dan 5: screenshot e2e.</p>
+    <p class="note">Gambar 3–4: <code>/demo</code> dengan AI service asli; foto DogFaceNet (CC BY 4.0) dan Wikimedia Commons (domain publik). Gambar 2 dan 5: screenshot e2e (Gambar 2 memakai suara uji).</p>
     <p><strong>Pengujian</strong> (dijalankan di repo): Vitest 46, test database 11, Playwright end-to-end 9 alur, pytest 38 + 21. <strong>Cara juri menguji:</strong> di <code>/demo</code>, unggah dua foto berbeda dari anjing yang sama (A didaftarkan, B dicocokkan).</p>
 
     <h2><span class="num">6</span>Technical Architecture</h2>

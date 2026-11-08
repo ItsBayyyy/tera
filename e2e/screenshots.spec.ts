@@ -8,7 +8,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { chooseBanjar, fixture, login, resetE2eBanjar, serviceClient, setAiMode } from "./helpers";
+import { chooseBanjar, fixture, installFakeSpeech, login, resetE2eBanjar, serviceClient, setAiMode } from "./helpers";
 
 test.skip(!process.env.SCREENSHOTS, "Set SCREENSHOTS=1 to refresh docs/screenshots");
 test.describe.configure({ mode: "serial" });
@@ -63,8 +63,15 @@ test.afterAll(async () => {
 test("citizen pages", async ({ page }) => {
   await page.goto("/");
   await shot(page, "01-beranda");
+  // Look of a phone that has an Indonesian voice (headless Chromium has none, so the button would hide).
+  await installFakeSpeech(page, ["id-ID"], 200, 1);
   await page.goto("/darurat");
   await shot(page, "02-darurat");
+  await page.getByRole("button", { name: "Bacakan langkah" }).click();
+  await page.getByRole("button", { name: "Berhenti membacakan" }).waitFor();
+  await page.locator('li[aria-current="step"]').waitFor();
+  await shot(page, "02b-darurat-dibacakan");
+  await page.getByRole("button", { name: "Berhenti membacakan" }).click();
   await page.getByRole("button", { name: "Isi laporan singkat" }).click();
   await shot(page, "03-darurat-form");
   await page.getByText("Tangan atau jari").click();

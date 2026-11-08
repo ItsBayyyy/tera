@@ -1,11 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Timer } from "lucide-react";
 import { WASH_MINUTES } from "@/content/first-aid";
 import { formatCountdown } from "@/lib/format";
+import { speak, useIndonesianVoice } from "@/lib/speech";
 
 const DURATION_MS = WASH_MINUTES * 60_000;
+const REMINDER_MS = 5 * 60_000;
+const START_MESSAGE = `Timer ${WASH_MINUTES} menit dimulai. Terus alirkan air dan sabun ke luka.`;
+const REMINDER_MESSAGE = "5 menit lagi. Terus cuci lukanya.";
+const DONE_MESSAGE = `${WASH_MINUTES} menit selesai. Lanjut ke langkah 2: beri antiseptik.`;
 
 type State = { kind: "idle" } | { kind: "running"; endsAt: number } | { kind: "done" };
 
@@ -42,15 +47,29 @@ export function WashTimer() {
   const [state, setState] = useState<State>({ kind: "idle" });
   const [now, setNow] = useState(0);
   useScreenAwake(state.kind === "running");
+  // Spoken cues need no look at the screen; silent when the phone has no Indonesian voice.
+  const voice = useIndonesianVoice();
+  const voiceRef = useRef(voice);
+  const remindedRef = useRef(false);
+  useEffect(() => {
+    voiceRef.current = voice;
+  }, [voice]);
 
   useEffect(() => {
     if (state.kind !== "running") return;
+    const say = (text: string) => {
+      if (voiceRef.current) speak(text, voiceRef.current);
+    };
     const id = setInterval(() => {
       const current = Date.now();
       setNow(current);
       if (current >= state.endsAt) {
         setState({ kind: "done" });
         navigator.vibrate?.([300, 150, 300]);
+        say(DONE_MESSAGE);
+      } else if (!remindedRef.current && state.endsAt - current <= REMINDER_MS) {
+        remindedRef.current = true;
+        say(REMINDER_MESSAGE);
       }
     }, 250);
     return () => clearInterval(id);
@@ -58,8 +77,10 @@ export function WashTimer() {
 
   function start() {
     const current = Date.now();
+    remindedRef.current = false;
     setNow(current);
     setState({ kind: "running", endsAt: current + DURATION_MS });
+    if (voice) speak(START_MESSAGE, voice);
   }
 
   const remaining = state.kind === "running" ? Math.max(0, state.endsAt - now) : DURATION_MS;
@@ -71,7 +92,7 @@ export function WashTimer() {
       <div role="status">
         {state.kind === "done" ? (
           <p className="mb-3 rounded-xl bg-ok-soft p-4 font-semibold text-ok">
-            {WASH_MINUTES} menit selesai. Lanjut ke langkah 2: beri antiseptik.
+            {DONE_MESSAGE}
           </p>
         ) : null}
       </div>

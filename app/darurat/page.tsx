@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Phone } from "lucide-react";
-import { FIRST_AID_INTRO, FIRST_AID_REVIEWED, FIRST_AID_STEPS } from "@/content/first-aid";
+import { FIRST_AID_INTRO, FIRST_AID_REVIEWED } from "@/content/first-aid";
 import { BiteReportFlow } from "./bite-report-flow";
-import { NearbyCareLink } from "./nearby-care-link";
-import { WashTimer } from "./wash-timer";
+import { FirstAidGuide } from "./first-aid-guide";
 
 export const metadata: Metadata = {
   title: "Digigit anjing",
@@ -20,24 +19,7 @@ export default function EmergencyPage() {
         <h1 className="mt-2 text-[1.75rem] font-bold leading-tight">Digigit anjing? Lakukan ini sekarang.</h1>
         <p className="mt-2 text-lg leading-snug text-ink">{FIRST_AID_INTRO}</p>
 
-        <ol className="mt-6 space-y-3" aria-label="Langkah pertolongan pertama">
-          {FIRST_AID_STEPS.map((step, index) => (
-            <li key={step.title} className="flex gap-4 rounded-card border border-line bg-surface p-4">
-              <span
-                aria-hidden="true"
-                className="tabular flex size-10 shrink-0 items-center justify-center rounded-full bg-ink text-lg font-bold text-white"
-              >
-                {index + 1}
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-lg font-bold leading-snug">{step.title}</p>
-                <p className="mt-1 text-ink-muted">{step.detail}</p>
-                {"action" in step && step.action === "wash-timer" ? <WashTimer /> : null}
-                {"action" in step && step.action === "nearby-care" ? <NearbyCareLink /> : null}
-              </div>
-            </li>
-          ))}
-        </ol>
+        <FirstAidGuide />
         {FIRST_AID_REVIEWED ? null : (
           <p className="mt-3 text-sm text-ink-muted">
             Isi panduan ini masih menunggu tinjauan tenaga kesehatan. Ikuti arahan petugas puskesmas atau rumah sakit.
