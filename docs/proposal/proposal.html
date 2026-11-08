@@ -242,8 +242,8 @@
       <tbody>
         <tr><th style="width:17%">Web</th><td>Next.js 16 + React 19, Tailwind CSS 4, PWA; Route Handlers TypeScript + zod</td></tr>
         <tr><th>Data</th><td>Supabase: Postgres + pgvector, Auth, Storage privat (signed URL), Realtime, Row Level Security</td></tr>
-        <tr><th>AI</th><td>Python FastAPI, PyTorch CPU, OWL-ViT, MiewID, OpenCV</td></tr>
-        <tr><th>Hosting</th><td>Rencana: Vercel, Supabase cloud, Hugging Face Spaces CPU. Semua tier gratis, tanpa biaya API.</td></tr>
+        <tr><th>AI</th><td>Python FastAPI, PyTorch CPU, OWL-ViT, MiewID, OpenCV; di-host di Modal</td></tr>
+        <tr><th>Hosting</th><td>Vercel, Supabase cloud, Modal (CPU serverless). Semua tier gratis, tanpa biaya API.</td></tr>
         <tr><th>Saat AI gagal</th><td>Timeout 15 detik, lalu "Catat tanpa verifikasi AI", lalu job rematch. Laporan warga tidak menunggu AI: kode kasus dikirim dulu, analisis foto menyusul.</td></tr>
         <tr><th>Privasi</th><td>EXIF dihapus di perangkat; lokasi dibulatkan ±110 m; foto di bucket privat; data pribadi opsional dengan persetujuan; tanpa API AI pihak ketiga.</td></tr>
       </tbody>
@@ -275,7 +275,7 @@
       <tbody>
         <tr><td>Lisensi MiewID belum dinyatakan</td><td>Minta izin tertulis ke Conservation X Labs / Wild Me; embedder bisa diganti</td></tr>
         <tr><td>Akurasi pada foto lapangan</td><td>Quality gate, tiga zona, konfirmasi petugas; evaluasi ulang dengan foto anjing Bali</td></tr>
-        <tr><td>Hosting gratis lambat saat bangun</td><td>Timeout 15 detik, "Catat tanpa verifikasi AI", rematch saat AI pulih</td></tr>
+        <tr><td>AI ±20 detik saat menyala</td><td>Layar scan membangunkan AI lebih awal; "Catat tanpa verifikasi AI"</td></tr>
         <tr><td>Panduan medis belum ditinjau</td><td>Ditandai di halaman; ditinjau tenaga kesehatan sebelum dipakai publik</td></tr>
         <tr><td>Data pribadi</td><td>Opsional + persetujuan, bucket privat, lokasi dibulatkan; retensi menunggu dinas</td></tr>
       </tbody>
@@ -308,7 +308,7 @@
         <tr><th>Framework / Frontend</th><td>Next.js 16.4 (MIT), React 19 (MIT), Tailwind CSS 4 (MIT); PWA dengan service worker</td></tr>
         <tr><th>Backend / Runtime</th><td>Next.js Route Handlers di Node.js 22 (TypeScript); AI service Python 3.11 dengan FastAPI (MIT) dan Uvicorn (BSD-3-Clause)</td></tr>
         <tr><th>Database / Storage</th><td>Supabase: PostgreSQL + pgvector (PostgreSQL License), Auth, Storage privat, Realtime</td></tr>
-        <tr><th>Hosting / Deployment</th><td>Rencana: Vercel (web), Supabase cloud (database), Hugging Face Spaces CPU (AI service). Semua tier gratis.</td></tr>
+        <tr><th>Hosting / Deployment</th><td>Vercel (web), Supabase cloud region Singapura (database), Modal CPU serverless (AI service). Semua tier gratis.</td></tr>
         <tr><th>AI Model / API / Method</th><td>(1) Quality gate OpenCV (Apache-2.0); (2) deteksi OWL-ViT base-patch32, <code>google/owlvit-base-patch32</code> (Apache-2.0); (3) embedding re-identifikasi MiewID msv3, <code>conservationxlabs/miewid-msv3</code> (<strong>lisensi tidak dinyatakan pembuat; izin tertulis belum diperoleh</strong>), dimuat dengan timm (Apache-2.0); (4) pencocokan cosine similarity pgvector di fungsi SQL <code>match_dogs()</code>. Semua inferensi di AI service milik sendiri. Tidak ada LLM dan tidak ada API AI pihak ketiga.</td></tr>
         <tr><th>Peran AI dalam Produk</th><td>Mengenali individu anjing dari foto: memeriksa kualitas foto, mendeteksi anjing dan wajahnya, membuat vektor identitas, lalu mencari anjing terdaftar yang paling mirip di banjar yang sama. Hasil ditampilkan dalam tiga zona; keputusan akhir selalu dikonfirmasi petugas. Pada laporan warga, AI hanya memberi saran kandidat anjing untuk petugas.</td></tr>
         <tr><th>Dataset / Data Source</th><td>DogFaceNet (Mougeot, Li, Jia, PRICAI 2019; CC BY 4.0; zenodo.org/records/12578449) untuk evaluasi dan data demo; foto Wikimedia Commons (CC0/domain publik) untuk kalibrasi dan test; gambar sintetis untuk e2e. Tidak ada data pribadi yang dipakai untuk pelatihan. Statistik rabies dari media yang dikutip di Lampiran B.</td></tr>
@@ -317,7 +317,7 @@
         <tr><th>AI Coding Assistant</th><td>Claude Code (Anthropic) dipakai untuk menulis kode, migrasi database, test, dokumentasi, dan draf proposal ini. Pengembang (Made Bayu Ardana Putra) meninjau, menjalankan, dan bertanggung jawab atas hasilnya; keputusan desain dicatat di <code>docs/DECISIONS.md</code>.</td></tr>
         <tr><th>Pre-existing Components</th><td>Konsep Mode Warga (panduan pertolongan pertama darurat, tombol telepon darurat, ringkasan kasus untuk petugas) dikembangkan dari karya tim sebelumnya, Vishara (FIT Competition 2026); implementasinya ditulis baru. Inti AI re-identifikasi, Mode Petugas, dasbor admin, dan mode demo dikembangkan baru untuk lomba ini.</td></tr>
         <tr><th>Third-party Assets / Credits</th><td>Font Plus Jakarta Sans (SIL OFL 1.1); ikon lucide-react (ISC); foto DogFaceNet (CC BY 4.0) di mode demo; foto Wikimedia Commons (domain publik): <em>Kintamani dog white</em> dan <em>Street dog-Gianyar Bali-2009</em> (Imk0278; Jack Merridew). Logo Tera dibuat untuk proyek ini.</td></tr>
-        <tr><th>Layanan pihak ketiga</th><td>Supabase (data operasional), Vercel (lalu lintas web), Hugging Face Spaces (menjalankan AI service milik sendiri; foto diproses di memori dan tidak disimpan), Hugging Face Hub (mengunduh bobot model saat build; tanpa data pengguna).</td></tr>
+        <tr><th>Layanan pihak ketiga</th><td>Supabase (data operasional), Vercel (lalu lintas web), Modal (menjalankan AI service milik sendiri; foto diproses di memori dan tidak disimpan), Hugging Face Hub (mengunduh bobot model saat build; tanpa data pengguna).</td></tr>
       </tbody>
     </table>
     <p class="statement"><strong>Pernyataan:</strong> Saya menyatakan bahwa informasi di atas benar dan lengkap. Saya bertanggung jawab atas penggunaan teknologi, source code, data, library, API, model AI, dan aset yang digunakan pada produk.</p>

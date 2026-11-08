@@ -46,3 +46,22 @@ export async function analyzeImage(image: Blob, timeoutMs: number = AI_TIMEOUT_M
     return { kind: "unavailable", reason: timedOut ? "timeout" : "network" };
   }
 }
+
+/**
+ * Wakes a scaled-to-zero AI service by calling its public /health, so the container is up by the
+ * time the first photo arrives. Waits long enough for a cold start; never throws.
+ */
+export async function warmUpAi(timeoutMs = 55_000): Promise<void> {
+  const baseUrl = process.env.AI_SERVICE_URL;
+  if (!baseUrl) return;
+  const started = Date.now();
+  try {
+    const response = await fetch(`${baseUrl.replace(/\/$/, "")}/health`, {
+      signal: AbortSignal.timeout(timeoutMs),
+      cache: "no-store",
+    });
+    logEvent("info", "ai.warm", { status: response.status, ms: Date.now() - started });
+  } catch {
+    logEvent("error", "ai.warm_failed", { ms: Date.now() - started });
+  }
+}

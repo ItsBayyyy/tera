@@ -39,7 +39,7 @@ Dampak ke re-ID (60 anjing acak, 301 foto): OWL-ViT B/32 rank-1 82,2% / TAR@FAR=
 | — embedding | 36 | 297 ms | 325 ms |
 | Seluruh foto evaluasi DogFaceNet mentah | 1516 | 899 ms | 954 ms |
 
-Target p50 ≤ 3 s terpenuhi. Latensi di HF Spaces CPU gratis **belum diukur**. Alat: `scripts/benchmark_latency.py`.
+Target p50 ≤ 3 s terpenuhi di laptop. **Di Modal** (2 CPU, region AS timur, diukur dari Indonesia pada 8 Nov 2026, satu kali): menyala dari kondisi mati sekitar **20 detik**, `/health` saat hangat sekitar **1 detik**. Latensi `/v1/analyze` lewat HTTP di Modal **belum diukur**. Alat: `scripts/benchmark_latency.py`.
 
 ## Ambang kualitas (awal)
 

@@ -160,7 +160,7 @@ PLAYWRIGHT_BROWSERS_PATH=0 npx playwright test   # e2e dengan AI mock (hidup & m
 
 ## Deploy
 
-Langkah deploy (Supabase cloud, Vercel, Hugging Face Spaces): [`docs/DEPLOY.md`](docs/DEPLOY.md). Semua di tier gratis, tanpa kartu kredit.
+Langkah deploy (Supabase cloud, Vercel, Modal untuk AI service): [`docs/DEPLOY.md`](docs/DEPLOY.md). Semua di tier gratis, tanpa kartu kredit.
 
 ## Model, dataset, dan lisensi
 

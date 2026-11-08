@@ -11,6 +11,7 @@ import { DogName, VaccineBadge } from "@/components/dog-bits";
 import { Button, Card, Label, LinkButton, Notice, inputClass } from "@/components/ui";
 import { analyzePhoto, appendPhotos, type MatchCandidate, type ScanMatchResponse, type ScanPhoto } from "@/lib/scan-client";
 import { MAX_SCAN_PHOTOS } from "@/lib/scan-limits";
+import { useWarmAi } from "@/lib/ai/use-warm-ai";
 import type { VaccineState } from "@/lib/vaccine";
 
 type Mode = "ai" | "pending" | "manual";
@@ -27,6 +28,7 @@ type Phase =
 const AI_STATUS_FOR_MODE = { ai: "verified", pending: "pending", manual: "manual" } as const;
 
 export function ScanFlow() {
+  useWarmAi();
   const { state } = useOfficer();
   const [photos, setPhotos] = useState<ScanPhoto[]>([]);
   const [phase, setPhase] = useState<Phase>({ kind: "capture" });

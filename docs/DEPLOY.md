@@ -1,6 +1,8 @@
 # Deploy
 
-Semua komponen berjalan di tier gratis tanpa kartu kredit: **Supabase** (database), **Hugging Face Spaces** (AI service), dan **Vercel** (web). Repo ini tetap menjadi satu-satunya sumber kode; Space hanya menerima salinan folder `ai-service/`.
+Semua komponen berjalan di tier gratis tanpa kartu kredit: **Supabase** (database), **Modal** (AI service, kredit gratis bulanan), dan **Vercel** (web). Repo ini tetap menjadi satu-satunya sumber kode; Modal membangun image langsung dari folder `ai-service/`.
+
+> Hugging Face Spaces kini mewajibkan paket berbayar untuk Space Docker, jadi AI service dipindah ke Modal. `ai-service/Dockerfile` tetap tersedia untuk host container lain.
 
 ## 1. Supabase
 
@@ -24,22 +26,31 @@ Semua komponen berjalan di tier gratis tanpa kartu kredit: **Supabase** (databas
 | Tempat | Variabel | Lihat |
 |---|---|---|
 | Vercel → Settings → Environment Variables | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `AI_SERVICE_URL`, `AI_SERVICE_KEY`, `JOBS_SECRET` | `.env.example` |
-| HF Space → Settings → Variables and secrets | `AI_SERVICE_KEY` (sama dengan di Vercel) | `ai-service/.env.example` |
+| Secret Modal `tera-ai` | `AI_SERVICE_KEY` (sama dengan di Vercel) | `ai-service/modal_app.py` |
 
 Buat nilai acak panjang untuk `AI_SERVICE_KEY` dan `JOBS_SECRET`, misalnya `openssl rand -hex 32`.
 
-## 3. AI service di Hugging Face Spaces
+## 3. AI service di Modal
 
-1. Buat Space tipe **Docker**, hardware **CPU basic** (gratis).
-2. Unggah isi `ai-service/` (Dockerfile dan README dengan front-matter Space sudah ada), misalnya:
+1. Daftar di modal.com (paket Starter: kredit gratis bulanan, tanpa kartu kredit), lalu pasang CLI dan login:
    ```bash
-   hf upload <user>/<nama-space> ai-service . --repo-type=space
+   uv pip install --python ai-service/.venv/Scripts/python.exe modal
+   ai-service/.venv/Scripts/modal setup
    ```
-   Bobot model (±0,8 GB) diunduh saat build image.
-3. Catat URL `https://<user>-<nama-space>.hf.space` untuk `AI_SERVICE_URL`, lalu ukur latensinya:
+2. Simpan kunci layanan sebagai secret (nilai yang sama dipakai di Vercel):
    ```bash
-   ai-service/.venv/Scripts/python scripts/benchmark_latency.py --url <URL Space> --key <AI_SERVICE_KEY>
+   ai-service/.venv/Scripts/modal secret create tera-ai AI_SERVICE_KEY=<nilai acak panjang>
    ```
+3. Deploy. Image dibangun dari `ai-service/requirements.txt`; bobot model (±0,8 GB) dimasukkan ke image saat build:
+   ```bash
+   ai-service/.venv/Scripts/modal deploy ai-service/modal_app.py
+   ```
+4. URL `https://<workspace>--tera-ai-web.modal.run` yang dicetak dipakai untuk `AI_SERVICE_URL`. Cek `<URL>/health`, lalu ukur latensinya:
+   ```bash
+   ai-service/.venv/Scripts/python scripts/benchmark_latency.py --url <URL> --key <AI_SERVICE_KEY>
+   ```
+
+Container dibatasi satu dan mati setelah 15 menit tanpa permintaan, jadi biaya hanya berjalan saat dipakai. Layar scan dan `/demo` memanggil `/api/ai/warm` saat dibuka untuk membangunkannya lebih awal.
 
 ## 4. Web di Vercel
 
@@ -50,8 +61,8 @@ Buat nilai acak panjang untuk `AI_SERVICE_KEY` dan `JOBS_SECRET`, misalnya `open
 ## 5. Menjaga layanan tetap aktif
 
 - Proyek Supabase Free dijeda bila database tidak dipakai sekitar seminggu.
-- Space CPU basic tidur setelah 48 jam tanpa aktivitas; permintaan pertama setelah itu lambat. Aplikasi menangani timeout 15 detik dengan "Catat tanpa verifikasi AI", tetapi pengalaman terbaik didapat bila Space sudah bangun.
-- Ping terjadwal sekali sehari ke `/health` AI service dan ke halaman yang membaca database menjaga keduanya tetap aktif.
+- AI service di Modal mati sendiri setelah 15 menit tanpa permintaan; permintaan pertama setelahnya menunggu container menyala. Layar scan dan `/demo` membangunkannya saat dibuka, dan aplikasi tetap menangani timeout 15 detik dengan "Catat tanpa verifikasi AI". Tidak perlu ping terjadwal ke AI service (itu hanya menghabiskan kredit).
+- Ping terjadwal sekali sehari ke halaman yang membaca database menjaga Supabase tetap aktif.
 
 ## 6. Data demo
 

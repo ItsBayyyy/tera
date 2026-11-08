@@ -54,7 +54,7 @@ flowchart LR
 
 | Keputusan | Alasan |
 |---|---|
-| AI service **stateless** | Tidak menyimpan foto/embedding; mudah di-deploy ke HF Spaces gratis dan diganti modelnya. |
+| AI service **stateless** | Tidak menyimpan foto/embedding; mudah di-deploy ke host serverless (Modal) dan diganti modelnya. |
 | **Pencocokan di Postgres** (`match_dogs`) | Data dan pencocokan di satu tempat, mengikuti RLS; tidak ada indeks vektor kedua yang harus disinkronkan. |
 | Kunci service role **hanya di server** | Dipakai untuk laporan warga, job rematch, dan mode demo. Operasi petugas memakai sesi pengguna agar RLS ikut berlaku. |
 | Laporan warga **tidak menunggu AI** | Kode kasus dikembalikan dulu; analisis foto berjalan di `after()`. AI mati tidak pernah menggagalkan laporan. |

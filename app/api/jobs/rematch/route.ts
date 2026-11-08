@@ -4,6 +4,9 @@ import { fail, json, requireStaff } from "@/lib/api";
 import { rematchPending } from "@/lib/rematch";
 import { logEvent } from "@/lib/log";
 
+// Room for an AI service cold start on top of the 15 s analysis timeout; platform defaults can be lower.
+export const maxDuration = 60;
+
 function hasJobSecret(request: Request): boolean {
   const secret = process.env.JOBS_SECRET;
   const header = request.headers.get("authorization") ?? "";

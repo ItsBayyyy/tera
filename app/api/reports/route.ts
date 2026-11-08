@@ -8,6 +8,9 @@ import { createRateLimiter } from "@/lib/rate-limit";
 import { matchReportPhoto } from "@/lib/reports";
 import { logEvent } from "@/lib/log";
 
+// Room for an AI service cold start on top of the 15 s analysis timeout; platform defaults can be lower.
+export const maxDuration = 60;
+
 const limit = createRateLimiter(5, 10 * 60 * 1000);
 const FIELDS = ["bittenAt", "bodyPart", "banjarId", "lat", "lon", "contactPhone", "consent"] as const;
 

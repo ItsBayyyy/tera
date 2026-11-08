@@ -6,6 +6,7 @@ import { CameraCapture } from "@/components/camera-capture";
 import { MatchResult } from "@/components/match-result";
 import { DogName, PhotoBox, VaccineBadge } from "@/components/dog-bits";
 import { qualityMessage } from "@/lib/ai/messages";
+import { useWarmAi } from "@/lib/ai/use-warm-ai";
 import type { QualityReason } from "@/lib/ai/types";
 import type { MatchCandidate } from "@/lib/scan-client";
 import type { Zone } from "@/lib/match/zone";
@@ -47,6 +48,7 @@ async function demoScan(body: FormData): Promise<ScanOutcome> {
 }
 
 export function DemoLab() {
+  useWarmAi();
   const [state, setState] = useState<DemoState | null | "error">(null);
 
   const load = useCallback(async () => {

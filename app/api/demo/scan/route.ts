@@ -5,6 +5,9 @@ import { runMatch } from "@/lib/match/run";
 import { demoLimiter, getDemoBanjarId } from "@/lib/demo";
 import { readDemoImage } from "@/lib/demo-image";
 
+// Room for an AI service cold start on top of the 15 s analysis timeout; platform defaults can be lower.
+export const maxDuration = 60;
+
 /** Demo: analyse one photo (upload or test photo) and match it against the DEMO banjar only. */
 export async function POST(request: Request) {
   if (!demoLimiter.scan(clientIp(request)).ok) return fail(429, "Terlalu banyak percobaan. Tunggu beberapa menit.");

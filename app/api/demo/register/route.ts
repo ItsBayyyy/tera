@@ -8,6 +8,9 @@ import { readDemoImage } from "@/lib/demo-image";
 import { qualityMessage } from "@/lib/ai/messages";
 import { optionalText } from "@/lib/validation/common";
 
+// Room for an AI service cold start on top of the 15 s analysis timeout; platform defaults can be lower.
+export const maxDuration = 60;
+
 const demoDogSchema = z.object({
   nickname: optionalText(40),
   color: z.string().trim().min(1, "Isi warna bulu.").max(40),

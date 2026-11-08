@@ -132,7 +132,7 @@ dogs): treat the difference as indicative only.
 
 **ONNX**: not attempted. The PyTorch pipeline already meets the latency target by ~3×, and an ONNX path
 would add `onnxruntime` plus export code for two models that then need their own ≥ 0.999 cosine check.
-Revisit only if the free HF Space CPU turns out too slow.
+Revisit only if the hosted CPU turns out too slow.
 
 ### Thresholds and how they were chosen
 
@@ -181,7 +181,20 @@ Tests (from `ai-service/`):
 .venv/Scripts/python -m pytest                   # also real-model tests (skipped if weights/samples missing)
 ```
 
-## Docker / Hugging Face Spaces
+## Deploy
+
+### Modal (used for the live app)
+
+`modal_app.py` serves the same FastAPI app on Modal: the image is built from `requirements.txt`, the
+pinned weights are baked in at build time, one container (2 CPU, 4 GB) scales to zero 15 minutes after the
+last request. `AI_SERVICE_KEY` comes from the Modal secret `tera-ai`. Steps: `../docs/DEPLOY.md`.
+
+```bash
+modal secret create tera-ai AI_SERVICE_KEY=change-me
+modal deploy ai-service/modal_app.py
+```
+
+### Docker (any container host)
 
 ```bash
 docker build -t tera-ai ai-service
@@ -192,8 +205,8 @@ The image is CPU-only (`python:3.11-slim`, CPU torch wheels), runs as non-root u
 `$PORT` (default 7860, what Spaces expects). **Weights are downloaded at build time**
 (`tools/download_models.py`) and the container then runs with `HF_HUB_OFFLINE=1`: cold starts do not
 depend on the Hub and every replica runs the same pinned revisions, at the cost of a bigger image.
-On Spaces, set `AI_SERVICE_KEY` as a secret; without it the container refuses to start. A free CPU Space
-has fewer cores than the laptop used for the numbers above, so expect higher latency there (not measured).
+Set `AI_SERVICE_KEY` as a secret on the host; without it the container refuses to start. Hugging Face
+Spaces now require a paid plan for Docker Spaces, which is why the live app uses Modal instead.
 
 ## Licenses
 
