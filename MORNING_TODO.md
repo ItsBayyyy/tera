@@ -66,5 +66,5 @@ Isi placeholder: URL live, nama tim, versi yang dinilai.
 Setelah semua di atas beres dan CI hijau:
 ```bash
 git tag v1.0-submission
-git push origin main --tags
+git push origin master --tags
 ```
