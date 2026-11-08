@@ -6,6 +6,7 @@ import { roundCoordinate } from "@/lib/geo";
 import { createRateLimiter } from "@/lib/rate-limit";
 import { fitWithin } from "@/lib/image/resize";
 import { qualityMessage } from "@/lib/ai/messages";
+import { hasAuthCookie } from "@/lib/auth-cookie";
 
 describe("vaccineState", () => {
   const now = new Date("2026-11-08T00:00:00Z");
@@ -95,5 +96,17 @@ describe("qualityMessage", () => {
 
   it("has a fallback when no reason is given", () => {
     expect(qualityMessage([])).toContain("Coba foto lagi");
+  });
+});
+
+describe("hasAuthCookie", () => {
+  it("finds the session cookie, also when chunked", () => {
+    expect(hasAuthCookie("sb-127-auth-token=base64-abc")).toBe(true);
+    expect(hasAuthCookie("theme=light; sb-abcd1234-auth-token.0=base64-abc")).toBe(true);
+  });
+
+  it("is false when the browser did not store it", () => {
+    expect(hasAuthCookie("")).toBe(false);
+    expect(hasAuthCookie("theme=light; sb-127-auth-token-code-verifier=x")).toBe(false);
   });
 });

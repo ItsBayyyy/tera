@@ -3,7 +3,12 @@
 import { useId, useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button, FieldError, Label, Notice, inputClass } from "@/components/ui";
+import { hasAuthCookie } from "@/lib/auth-cookie";
 import { getBrowserClient } from "@/lib/supabase/browser";
+
+const COOKIE_BLOCKED = "Browser ini tidak mau menyimpan sesi masuk.";
+const COOKIE_BLOCKED_DETAIL =
+  "Buka Tera langsung di tab browser, bukan di dalam simulator atau bingkai halaman lain, lalu pastikan cookie untuk situs ini diizinkan.";
 
 /** Only same-site paths are allowed as the post-login destination. */
 function safeNext(value: string | null): string {
@@ -14,7 +19,9 @@ export function LoginForm() {
   const router = useRouter();
   const next = safeNext(useSearchParams().get("lanjut"));
   const ids = { email: useId(), password: useId(), emailError: useId(), passwordError: useId() };
-  const [errors, setErrors] = useState<{ email?: string; password?: string; form?: string }>({});
+  const [errors, setErrors] = useState<{ email?: string; password?: string; form?: string; formDetail?: string }>(
+    {},
+  );
   const [pending, setPending] = useState(false);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -41,6 +48,12 @@ export function LoginForm() {
             ? "Email atau kata sandi salah."
             : "Belum bisa masuk. Periksa sinyal lalu coba lagi.",
       });
+      return;
+    }
+    // Without the cookie the server sees no session and sends the officer straight back here.
+    if (!hasAuthCookie(document.cookie)) {
+      setPending(false);
+      setErrors({ form: COOKIE_BLOCKED, formDetail: COOKIE_BLOCKED_DETAIL });
       return;
     }
     router.replace(next);
@@ -76,7 +89,11 @@ export function LoginForm() {
         />
         <FieldError id={ids.passwordError} message={errors.password} />
       </div>
-      {errors.form ? <Notice tone="danger" title={errors.form} /> : null}
+      {errors.form ? (
+        <Notice tone="danger" title={errors.form}>
+          {errors.formDetail}
+        </Notice>
+      ) : null}
       <Button type="submit" className="w-full" disabled={pending}>
         {pending ? "Masuk…" : "Masuk"}
       </Button>
