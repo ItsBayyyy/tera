@@ -40,3 +40,4 @@ Setiap keputusan yang tidak ditetapkan eksplisit oleh `KENALASU_BUILD_PROMPT.md`
 ## Nama
 
 - **D24 — Aplikasi diganti nama dari KenalAsu menjadi Tera** atas permintaan pemilik (KBBI: *tera* = cap/tanda resmi). Semua nama tampilan, identifier internal (nama paket, logger, cache service worker, `project_id` Supabase lokal, domain akun uji `tera.test`) ikut diganti. Rujukan ke file `KENALASU_BUILD_PROMPT.md` dibiarkan karena itu nama file aslinya; nama folder induk `KenalAsu/` di luar repo tidak diubah.
+- **D25 — Logo: kepala anjing berkuping tegak (anjing kampung Bali) dengan lencana centang** sebagai "tera" (cap resmi bahwa anjing tercatat), warna aksen `#1f4f7a`. Semua ikon (SVG, PNG 192/512, maskable, apple-icon, favicon) dibangkitkan dari satu sumber vektor oleh `scripts/build-icons.mjs` memakai Chromium Playwright yang sudah terpasang, tanpa dependensi baru. Favicon 16–48 px memakai kepala saja karena lencana tidak terbaca di ukuran itu.

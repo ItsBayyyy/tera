@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, type ReactNode } from "react";
+import { Brand } from "@/components/brand";
 import { ErrorState, ListSkeleton } from "@/components/ui";
 import { OfficerProvider, useOfficer } from "./officer-context";
 
@@ -29,8 +30,10 @@ function OfficerHeader() {
   return (
     <header className="border-b border-line bg-surface">
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-2 px-4 pt-3">
-        <Link href="/petugas" className="text-lg font-bold">
-          Tera <span className="font-medium text-ink-muted">Petugas</span>
+        <Link href="/petugas" className="rounded-lg">
+          <Brand>
+            <span className="font-medium text-ink-muted">Petugas</span>
+          </Brand>
         </Link>
         <button
           type="button"

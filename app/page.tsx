@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { ShieldCheck, Siren } from "lucide-react";
+import { Brand } from "@/components/brand";
 
 export default function Home() {
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col px-4 pb-8 pt-10">
-      <p className="text-lg font-bold tracking-tight">Tera</p>
+      <p>
+        <Brand />
+      </p>
       <h1 className="mt-6 text-[1.75rem] font-bold leading-tight">Apa yang Anda perlukan sekarang?</h1>
 
       <nav aria-label="Pilih mode" className="mt-8 flex flex-1 flex-col gap-4">

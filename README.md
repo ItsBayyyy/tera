@@ -1,3 +1,5 @@
+<img src="public/icon.svg" width="96" height="96" alt="Logo Tera: kepala anjing dengan lencana centang">
+
 # Tera
 
 *Tera* (KBBI): cap atau tanda resmi. Setiap anjing yang divaksin mendapat "tera" digital — identitas yang bisa dicek ulang dari fotonya.
