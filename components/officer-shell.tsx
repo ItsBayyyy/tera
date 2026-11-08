@@ -13,12 +13,17 @@ const NAV = [
   { href: "/admin", label: "Admin", adminOnly: true, isActive: (p: string) => p.startsWith("/admin") },
 ];
 
+/**
+ * Header and account context for every officer page. The shell always renders its children:
+ * each page wraps itself in <OfficerGate>, so the layout never drops a segment and Next.js can
+ * validate instant navigation into it.
+ */
 export function OfficerShell({ children }: { children: ReactNode }) {
   return (
     <OfficerProvider>
       <OfficerHeader />
       <main className="mx-auto w-full max-w-3xl flex-1 px-4 pb-32 pt-4">
-        <OfficerGate>{children}</OfficerGate>
+        {children}
       </main>
     </OfficerProvider>
   );
@@ -80,7 +85,8 @@ function OfficerNav() {
   );
 }
 
-function OfficerGate({ children }: { children: ReactNode }) {
+/** Shows a skeleton until the officer account is loaded, then the page. */
+export function OfficerGate({ children }: { children: ReactNode }) {
   const { state, reload } = useOfficer();
   if (state.kind === "loading") return <ListSkeleton rows={3} label="Memuat akun petugas" />;
   if (state.kind === "error") {
