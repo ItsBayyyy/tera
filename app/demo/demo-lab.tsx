@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useState, type FormEvent } from "react";
-import { Badge, Button, Card, EmptyState, ErrorState, FieldError, Label, ListSkeleton, Notice, inputClass } from "@/components/ui";
+import { Badge, Button, Card, EmptyState, ErrorState, FieldError, Label, ListSkeleton, Notice, RequiredNote, inputClass } from "@/components/ui";
 import { CameraCapture } from "@/components/camera-capture";
 import { MatchResult } from "@/components/match-result";
 import { DogName, PhotoBox, VaccineBadge } from "@/components/dog-bits";
@@ -170,9 +170,12 @@ function TryItYourself({ onChange }: { onChange: () => void }) {
           <>
             {photoA ? <p className="font-semibold text-ok">Foto A siap.</p> : <CameraCapture onCapture={setPhotoA} captureLabel="Foto A" />}
             <form onSubmit={register} noValidate className="space-y-4">
+              <RequiredNote />
               <div>
-                <Label htmlFor={ids.color}>Warna bulu</Label>
-                <input id={ids.color} name="color" className={inputClass} aria-invalid={Boolean(errors.color)} aria-describedby={errors.color ? ids.colorError : undefined} />
+                <Label htmlFor={ids.color} required>
+                  Warna bulu
+                </Label>
+                <input id={ids.color} name="color" required className={inputClass} aria-invalid={Boolean(errors.color)} aria-describedby={errors.color ? ids.colorError : undefined} />
                 <FieldError id={ids.colorError} message={errors.color} />
               </div>
               <div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, type FormEvent } from "react";
-import { Button, FieldError, Label, inputClass } from "@/components/ui";
+import { Button, FieldError, Label, RequiredMark, RequiredNote, inputClass } from "@/components/ui";
 import { DOG_OWNERSHIP, DOG_SEX, OWNERSHIP_LABEL, SEX_LABEL } from "@/lib/validation/dog";
 
 export type DogFormValues = Record<"nickname" | "color" | "sex" | "ownership" | "ownerName" | "ownerPhone", string>;
@@ -17,14 +17,17 @@ type Props = {
 function ChoiceGroup({ legend, name, options }: { legend: string; name: string; options: readonly [string, string][] }) {
   return (
     <fieldset>
-      <legend className="text-[0.95rem] font-semibold">{legend}</legend>
+      <legend className="text-[0.95rem] font-semibold">
+        {legend}
+        <RequiredMark />
+      </legend>
       <div className="mt-2 grid grid-cols-3 gap-2">
         {options.map(([value, label], index) => (
           <label
             key={value}
             className="flex min-h-12 cursor-pointer items-center justify-center rounded-xl border-2 border-line-strong bg-surface px-2 text-center text-[0.95rem] font-semibold has-[:checked]:border-accent has-[:checked]:bg-accent-soft has-[:checked]:text-accent"
           >
-            <input type="radio" name={name} value={value} defaultChecked={index === options.length - 1} className="sr-only" />
+            <input type="radio" name={name} value={value} required defaultChecked={index === options.length - 1} className="sr-only" />
             {label}
           </label>
         ))}
@@ -59,8 +62,11 @@ export function DogForm({ pending, errors, submitLabel, onSubmit, showOwner = tr
 
   return (
     <form onSubmit={submit} noValidate className="space-y-5">
+      <RequiredNote />
       <div>
-        <Label htmlFor={ids.color}>Warna bulu</Label>
+        <Label htmlFor={ids.color} required>
+          Warna bulu
+        </Label>
         <input
           id={ids.color}
           name="color"

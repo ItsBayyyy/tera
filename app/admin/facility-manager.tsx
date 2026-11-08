@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useState, type FormEvent } from "react";
-import { Badge, Button, EmptyState, FieldError, Label, ListSkeleton, Notice, inputClass } from "@/components/ui";
+import { Badge, Button, EmptyState, FieldError, Label, ListSkeleton, Notice, RequiredNote, inputClass } from "@/components/ui";
 import { getBrowserClient } from "@/lib/supabase/browser";
 import type { Tables } from "@/lib/supabase/database.types";
 
@@ -136,14 +136,19 @@ function FacilityForm({
   return (
     <form onSubmit={submit} noValidate className="space-y-4 rounded-card border border-line bg-surface p-4">
       <h3 className="text-lg font-bold">{facility ? "Ubah faskes" : "Tambah faskes"}</h3>
+      <RequiredNote />
       <div>
-        <Label htmlFor={ids.name}>Nama</Label>
-        <input id={ids.name} name="name" defaultValue={facility?.name} className={inputClass} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? ids.nameError : undefined} />
+        <Label htmlFor={ids.name} required>
+          Nama
+        </Label>
+        <input id={ids.name} name="name" required defaultValue={facility?.name} className={inputClass} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? ids.nameError : undefined} />
         <FieldError id={ids.nameError} message={errors.name} />
       </div>
       <div>
-        <Label htmlFor={ids.type}>Jenis</Label>
-        <input id={ids.type} name="type" placeholder="Puskesmas, RSUD, Rabies Center" defaultValue={facility?.type} className={inputClass} aria-invalid={Boolean(errors.type)} aria-describedby={errors.type ? ids.typeError : undefined} />
+        <Label htmlFor={ids.type} required>
+          Jenis
+        </Label>
+        <input id={ids.type} name="type" required placeholder="Puskesmas, RSUD, Rabies Center" defaultValue={facility?.type} className={inputClass} aria-invalid={Boolean(errors.type)} aria-describedby={errors.type ? ids.typeError : undefined} />
         <FieldError id={ids.typeError} message={errors.type} />
       </div>
       <div>

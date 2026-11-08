@@ -77,10 +77,38 @@ export function FieldError({ id, message }: { id: string; message?: string }) {
 export const inputClass =
   "mt-1 block min-h-12 w-full rounded-xl border-2 border-line-strong bg-surface px-3 text-base text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none";
 
-export function Label({ htmlFor, children, hint }: { htmlFor: string; children: ReactNode; hint?: string }) {
+/** Visual marker only; screen readers learn "required" from the input's `required` attribute. */
+export function RequiredMark() {
+  return (
+    <span aria-hidden="true" className="ml-0.5 text-danger">
+      *
+    </span>
+  );
+}
+
+export function RequiredNote() {
+  return (
+    <p className="text-sm text-ink-muted">
+      Isian bertanda <span className="font-semibold text-danger">*</span> wajib diisi.
+    </p>
+  );
+}
+
+export function Label({
+  htmlFor,
+  children,
+  hint,
+  required = false,
+}: {
+  htmlFor: string;
+  children: ReactNode;
+  hint?: string;
+  required?: boolean;
+}) {
   return (
     <label htmlFor={htmlFor} className="block text-[0.95rem] font-semibold text-ink">
       {children}
+      {required ? <RequiredMark /> : null}
       {hint ? <span className="ml-1 font-normal text-ink-muted">{hint}</span> : null}
     </label>
   );

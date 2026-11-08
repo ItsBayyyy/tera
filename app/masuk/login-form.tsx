@@ -2,7 +2,7 @@
 
 import { useId, useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Button, FieldError, Label, Notice, inputClass } from "@/components/ui";
+import { Button, FieldError, Label, Notice, RequiredNote, inputClass } from "@/components/ui";
 import { hasAuthCookie } from "@/lib/auth-cookie";
 import { getBrowserClient } from "@/lib/supabase/browser";
 
@@ -62,11 +62,15 @@ export function LoginForm() {
 
   return (
     <form onSubmit={submit} noValidate className="mt-6 space-y-5">
+      <RequiredNote />
       <div>
-        <Label htmlFor={ids.email}>Email</Label>
+        <Label htmlFor={ids.email} required>
+          Email
+        </Label>
         <input
           id={ids.email}
           name="email"
+          required
           type="email"
           autoComplete="username"
           inputMode="email"
@@ -77,10 +81,13 @@ export function LoginForm() {
         <FieldError id={ids.emailError} message={errors.email} />
       </div>
       <div>
-        <Label htmlFor={ids.password}>Kata sandi</Label>
+        <Label htmlFor={ids.password} required>
+          Kata sandi
+        </Label>
         <input
           id={ids.password}
           name="password"
+          required
           type="password"
           autoComplete="current-password"
           className={inputClass}

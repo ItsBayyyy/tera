@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useState, type FormEvent } from "react";
 import { useOfficer } from "@/components/officer-context";
-import { Badge, Button, Card, EmptyState, ErrorState, FieldError, Label, ListSkeleton, Notice, inputClass } from "@/components/ui";
+import { Badge, Button, Card, EmptyState, ErrorState, FieldError, Label, ListSkeleton, Notice, RequiredNote, inputClass } from "@/components/ui";
 import { getBrowserClient } from "@/lib/supabase/browser";
 import { formatPercent, formatScore } from "@/lib/format";
 import type { Tables } from "@/lib/supabase/database.types";
@@ -271,15 +271,21 @@ function ThresholdForm() {
         <ListSkeleton rows={2} label="Memuat pengaturan" />
       ) : (
         <form onSubmit={save} noValidate className="space-y-4">
+          <RequiredNote />
           <div className="grid gap-4 sm:grid-cols-3">
             <div>
-              <Label htmlFor={ids.strong}>Ambang kuat</Label>
-              <input id={ids.strong} inputMode="decimal" value={values.strong} onChange={(e) => setValues({ ...values, strong: e.target.value })} className={inputClass} />
+              <Label htmlFor={ids.strong} required>
+                Ambang kuat
+              </Label>
+              <input id={ids.strong} required inputMode="decimal" value={values.strong} onChange={(e) => setValues({ ...values, strong: e.target.value })} className={inputClass} />
             </div>
             <div>
-              <Label htmlFor={ids.unsure}>Ambang ragu</Label>
+              <Label htmlFor={ids.unsure} required>
+                Ambang ragu
+              </Label>
               <input
                 id={ids.unsure}
+                required
                 inputMode="decimal"
                 value={values.unsure}
                 onChange={(e) => setValues({ ...values, unsure: e.target.value })}
@@ -290,8 +296,10 @@ function ThresholdForm() {
               <FieldError id={ids.unsureError} message={errors.matchUnsure} />
             </div>
             <div>
-              <Label htmlFor={ids.days}>Periode vaksin (hari)</Label>
-              <input id={ids.days} inputMode="numeric" value={values.days} onChange={(e) => setValues({ ...values, days: e.target.value })} className={inputClass} />
+              <Label htmlFor={ids.days} required>
+                Periode vaksin (hari)
+              </Label>
+              <input id={ids.days} required inputMode="numeric" value={values.days} onChange={(e) => setValues({ ...values, days: e.target.value })} className={inputClass} />
             </div>
           </div>
           <p className="text-sm text-ink-muted">
