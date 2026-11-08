@@ -70,7 +70,7 @@ Akun lokal: `petugas@tera.test`, `admin@tera.test` (kata sandi di `supabase/seed
 5. Tinjau panduan pertolongan pertama dengan tenaga kesehatan.
 6. Isi daftar faskes dari sumber resmi.
 7. **Verifikasi lisensi MiewID (tidak dinyatakan pembuatnya — paling berisiko)**, atribusi DogFaceNet.
-8. Lengkapi placeholder README (URL live, tim, kategori).
+8. Lengkapi placeholder README dan proposal (URL live, URL repo, kontak peserta).
 9. Buat tag `v1.0-submission`.
 
 ### Catatan lingkungan

@@ -9,11 +9,11 @@ Aplikasi web (PWA, mobile-first) untuk pengendalian rabies di Bali. **Petugas va
 | | |
 |---|---|
 | Lomba | Bali DigiFest 2026 — AI Web Innovation Challenge |
-| Kategori | Mahasiswa/Umum *(pilih sesuai pendaftaran)* |
+| Kategori | Mahasiswa/Umum |
 | Subtema | Bali Smart Society |
 | URL live | *(isi setelah deploy — lihat `MORNING_TODO.md`)* |
-| Versi yang dinilai | *(tag `v1.0-submission`, dibuat pemilik repo)* |
-| Tim | *(isi nama anggota)* |
+| Versi yang dinilai | tag `v1.0-submission` |
+| Peserta | Made Bayu Ardana Putra (individu), Universitas Primakara |
 
 ## Masalah
 

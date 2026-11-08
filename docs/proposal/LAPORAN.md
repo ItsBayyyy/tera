@@ -6,7 +6,7 @@ Dibuat 8 Nov 2026 dari `PROPOSAL_PROMPT.md`.
 
 | Hal | Nilai |
 |---|---|
-| File | `docs/proposal/AIWIC2026_NamaTim_Tera.pdf` |
+| File | `docs/proposal/AIWIC2026_MadeBayuArdanaPutra_Tera.pdf` |
 | Halaman | 8 total: **cover 1 / isi 5 / lampiran 2** (Lampiran A disclosure, Lampiran B referensi) |
 | Ukuran | 967 KB, A4 (209,9 × 297 mm), tidak diproteksi password |
 | Font | Plus Jakarta Sans Regular, Medium, SemiBold, Bold, ExtraBold, semuanya ter-embed sebagai subset TrueType; tidak ada font lain |
@@ -20,7 +20,7 @@ Panduan resmi ditemukan (di luar repo, PDF milik pemilik). Ketentuan beserta nom
 
 - Maksimal 5 halaman isi di luar cover dan lampiran; PDF A4; Bahasa Indonesia; tidak diproteksi (hal. 5).
 - **Urutan 10 bagian mengikuti panduan** (hal. 5, 11–12). Ini menggantikan susunan "halaman 1 = masalah, halaman 2 = pembeda, ..." di `PROPOSAL_PROMPT.md`; isi yang diminta prompt tetap ada, hanya posisinya mengikuti urutan panduan (mis. tabel pembanding ada di bagian 7, bukan halaman 2).
-- Nama file mengikuti rekomendasi panduan `AIWIC2026_NamaTim_NamaProduk.pdf` (hal. 5), bukan `KenalAsu_Proposal_Tahap1.pdf` dari prompt.
+- Nama file mengikuti rekomendasi panduan `AIWIC2026_NamaTim_NamaProduk.pdf` (hal. 5), bukan `KenalAsu_Proposal_Tahap1.pdf` dari prompt; karena peserta individu, posisi nama tim diisi nama peserta.
 - Disclosure memakai tabel Lampiran C + kalimat pernyataan (hal. 12–13).
 - Kredensial demo tidak dicantumkan; disebut dikirim lewat kanal panitia (hal. 6).
 
@@ -30,20 +30,15 @@ Asumsi karena panduan tidak mengatur: font Plus Jakarta Sans 10,5 pt untuk teks 
 
 ## Placeholder yang harus diisi pemilik
 
-Ditandai sorotan kuning di PDF (12 kemunculan, 9 jenis):
+Ditandai sorotan kuning di PDF (5 kemunculan, 3 jenis):
 
 | Placeholder | Letak |
 |---|---|
-| `[ISI: nama tim]` | Cover |
-| `[ISI: nama ketua]` | Cover |
-| `[ISI: nama anggota 2]`, `[ISI: nama anggota 3]` | Cover (hapus yang tidak perlu bila tim < 3 orang) |
-| `[ISI: universitas/komunitas, bila ada]` | Cover |
-| `[ISI: email dan nomor HP ketua]` | Cover |
+| `[ISI: email dan nomor HP peserta]` | Cover |
 | `[ISI: URL website live]` | Cover, bagian 10 |
 | `[ISI: URL repository GitHub]` | Cover, bagian 10 |
-| `[ISI: commit hash]` | Cover, bagian 10 |
 
-Juga: ganti `NamaTim` pada nama file (konstanta `OUTPUT` di `scripts/build-proposal.mjs`), lalu jalankan ulang `PLAYWRIGHT_BROWSERS_PATH=0 npm run proposal`.
+Data peserta sudah diisi (pembaruan 8 Nov 2026): peserta individu **Made Bayu Ardana Putra**, **Universitas Primakara**, kategori **Mahasiswa/Umum**, versi dinilai tag **`v1.0-submission`** (tag Git dibuat pemilik repo, bukan oleh skrip). Placeholder commit hash dihapus karena panduan (hal. 6) menerima commit hash *atau* release/tag. Istilah "tim/anggota/ketua" yang merujuk ke peserta diganti "peserta/pengembang", dan kalimat pernyataan disclosure memakai "Saya". Yang tetap: "Tim Siaga Rabies desa" (nama satuan petugas) dan "karya tim sebelumnya, Vishara".
 
 ## Verifikasi sumber
 
@@ -83,7 +78,7 @@ Ditulis ulang agar **identik** dengan Lampiran A proposal (dicek otomatis: 14 ba
 | File | Fungsi |
 |---|---|
 | `docs/proposal/proposal.html`, `proposal.css` | Sumber proposal |
-| `docs/proposal/AIWIC2026_NamaTim_Tera.pdf` | Hasil |
+| `docs/proposal/AIWIC2026_MadeBayuArdanaPutra_Tera.pdf` | Hasil |
 | `docs/proposal/img/demo-*.png` | Screenshot hasil AI asli |
 | `docs/proposal/fonts/` | Plus Jakarta Sans (OFL): varian variabel Latin + 5 instance statis, dibuat oleh `make_static.py` (butuh fontTools + brotli) |
 | `scripts/build-proposal.mjs` | `npm run proposal` |

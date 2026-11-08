@@ -7,8 +7,8 @@ import { pathToFileURL } from "node:url";
 import { chromium } from "@playwright/test";
 
 const SOURCE = path.resolve("docs/proposal/proposal.html");
-// Guidebook page 5 recommends AIWIC2026_NamaTim_NamaProduk.pdf; rename once the team name is known.
-const OUTPUT = path.resolve("docs/proposal/AIWIC2026_NamaTim_Tera.pdf");
+// Guidebook page 5 recommends AIWIC2026_NamaTim_NamaProduk.pdf; an individual entrant uses their own name.
+const OUTPUT = path.resolve("docs/proposal/AIWIC2026_MadeBayuArdanaPutra_Tera.pdf");
 const MAX_BODY_PAGES = 5;
 
 const browser = await chromium.launch();
