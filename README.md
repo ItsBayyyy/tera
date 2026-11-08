@@ -11,7 +11,7 @@ Aplikasi web (PWA, mobile-first) untuk pengendalian rabies di Bali. **Petugas va
 | Lomba | Bali DigiFest 2026 — AI Web Innovation Challenge |
 | Kategori | Mahasiswa/Umum |
 | Subtema | Bali Smart Society |
-| URL live | *(isi setelah deploy — lihat [`docs/DEPLOY.md`](docs/DEPLOY.md))* |
+| URL live | https://tera-three-gamma.vercel.app (mode demo tanpa login: `/demo`) |
 | Versi yang dinilai | tag `v1.0-submission` |
 | Peserta | Made Bayu Ardana Putra (individu), Universitas Primakara |
 

@@ -240,3 +240,6 @@ svg.diagram .dash { stroke-dasharray: 4 3; }
 .statement { margin-top: 3mm; padding: 2.6mm 3.2mm; border-left: 1.2mm solid var(--accent); background: var(--accent-soft); border-radius: 0 2mm 2mm 0; font-size: 9pt; }
 ol.refs { padding-left: 5mm; margin: 0; font-size: 9pt; }
 ol.refs li { margin-bottom: 2mm; overflow-wrap: anywhere; }
+
+/* Links stay clickable in the PDF but read as text, not browser-blue. */
+a { color: var(--accent); text-decoration: none; font-weight: 600; }
